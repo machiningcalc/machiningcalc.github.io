@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>기계가공 허브 — 절삭속도·이송속도·가공시간·공구수명 계산기</title>
+<meta name="description" content="기계가공 허브: 무료 온라인 절삭가공 계산기 — 절삭속도와 스핀들 회전수, 이송속도, 가공 시간, 테일러 식 공구 수명, 절삭동력과 재료제거율. KS B 및 KEC 기준, 380V 3상 / 220V 단상, 60Hz.">
+<meta name="theme-color" content="#0f172a">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<style>
+:root{--navy:#0f172a;--navy2:#1e293b;--amber:#f59e0b;--amber-dark:#d97706;--amber-bg:#fef3c7;--bg:#f1f5f9;--card:#fff;--text:#0f172a;--muted:#64748b;--border:#e2e8f0;--green:#15803d;--green-bg:#dcfce7;--red:#b91c1c;--red-bg:#fee2e2;--radius:14px;--shadow:0 1px 3px rgba(15,23,42,.08),0 4px 14px rgba(15,23,42,.06)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+.wrap{max-width:1080px;margin:0 auto;padding:0 16px}
+a{color:var(--amber-dark)}
+/* ---------- Header ---------- */
+header{background:var(--navy);color:#fff;position:sticky;top:0;z-index:50;box-shadow:0 2px 10px rgba(0,0,0,.25)}
+.header-in{display:flex;align-items:center;gap:14px;padding:13px 16px;max-width:1080px;margin:0 auto;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:#fff;flex:1;min-width:200px}
+.brand .mark{width:38px;height:38px;border-radius:9px;background:var(--amber);color:var(--navy);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:19px;flex:none}
+.brand b{font-size:19px;letter-spacing:.2px}
+.brand b span{color:var(--amber)}
+.brand small{display:block;font-size:11.5px;color:#94a3b8;font-weight:400}
+nav.main-nav{display:flex;gap:4px;flex-wrap:wrap}
+nav.main-nav a{color:#cbd5e1;text-decoration:none;font-size:14px;font-weight:600;padding:8px 11px;border-radius:8px}
+nav.main-nav a:hover{background:var(--navy2);color:#fff}
+/* ---------- Hero ---------- */
+.hero{background:linear-gradient(135deg,var(--navy) 0%,#1e293b 60%,#334155 100%);color:#fff;padding:44px 0 40px}
+.hero h1{font-size:clamp(26px,5vw,40px);line-height:1.2;max-width:760px}
+.hero h1 span{color:var(--amber)}
+.hero p{color:#cbd5e1;font-size:16px;max-width:720px;margin-top:12px}
+.hero .badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.hero .badge{background:rgba(245,158,11,.16);border:1px solid rgba(245,158,11,.45);color:#fde68a;font-size:13px;font-weight:600;border-radius:999px;padding:6px 13px}
+section{padding:34px 0 8px}
+section h2{font-size:24px;margin-bottom:6px}
+section h2 .bar{color:var(--amber)}
+.section-sub{color:var(--muted);font-size:15px;max-width:760px;margin-bottom:20px}
+/* ---------- Calculator cards ---------- */
+.calc-grid{display:grid;grid-template-columns:1fr;gap:18px}
+@media(min-width:860px){.calc-grid{grid-template-columns:1fr 1fr}.calc-grid .wide{grid-column:1 / -1}}
+.card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px 20px;border-top:4px solid var(--amber)}
+.card h3{font-size:18px;margin-bottom:2px}
+.card .tag{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--amber-dark)}
+.card .desc{font-size:14px;color:var(--muted);margin:6px 0 16px}
+.field{margin-bottom:12px}
+.field label{display:block;font-size:13.5px;font-weight:600;margin-bottom:6px}
+.field label small{font-weight:400;color:var(--muted)}
+.field input,.field select{width:100%;padding:11px 13px;border:1.5px solid var(--border);border-radius:10px;font-size:15px;font-family:inherit;outline:none;background:#fff;color:var(--text)}
+.field input:focus,.field select:focus{border-color:var(--amber);box-shadow:0 0 0 3px rgba(245,158,11,.18)}
+.field-row{display:grid;grid-template-columns:1fr;gap:0 12px}
+@media(min-width:560px){.field-row{grid-template-columns:1fr 1fr}}
+.btn{display:inline-flex;align-items:center;justify-content:center;background:var(--amber);color:var(--navy);border:0;border-radius:10px;padding:12px 22px;font-size:15px;font-weight:800;min-height:46px;cursor:pointer;font-family:inherit}
+.btn:hover{background:var(--amber-dark);color:#fff}
+.btn-row{margin-top:4px}
+.results{display:none;margin-top:16px}
+.results.show{display:block}
+.results h4{font-size:14px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(min-width:560px){.stat-grid{grid-template-columns:repeat(3,1fr)}}
+.stat{background:#f8fafc;border:1px solid var(--border);border-radius:12px;padding:12px;text-align:center}
+.stat.hero{background:var(--amber-bg);border-color:#fde68a}
+.stat .k{font-size:11.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
+.stat .v{font-size:19px;font-weight:800;margin-top:3px;word-break:break-word}
+.stat.hero .v{color:#92400e}
+.stat.wide{grid-column:1 / -1}
+.verdict{margin-top:10px;border-radius:10px;padding:11px 14px;font-size:14px;font-weight:600}
+.verdict.ok{background:var(--green-bg);color:var(--green)}
+.verdict.warn{background:var(--amber-bg);color:#92400e}
+.verdict.bad{background:var(--red-bg);color:var(--red)}
+.note{font-size:12.5px;color:var(--muted);margin-top:12px}
+.formula{font-size:13px;color:var(--muted);background:#f8fafc;border:1px dashed var(--border);border-radius:8px;padding:8px 11px;margin-top:12px}
+.formula code{color:var(--navy);font-weight:600}
+/* ---------- Table ---------- */
+.table-wrap{overflow-x:auto;background:#fff;border-radius:var(--radius);box-shadow:var(--shadow)}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:14px}
+th{background:var(--navy);color:#fff;text-align:left;padding:11px 12px;font-size:13px}
+td{padding:10px 12px;border-bottom:1px solid var(--border)}
+tr:nth-child(even) td{background:#f8fafc}
+/* ---------- Guides ---------- */
+.guide-grid{display:grid;grid-template-columns:1fr;gap:16px}
+@media(min-width:640px){.guide-grid{grid-template-columns:1fr 1fr}}
+@media(min-width:960px){.guide-grid{grid-template-columns:1fr 1fr 1fr}}
+.guide{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:20px 18px;border-left:4px solid var(--amber)}
+.guide .g-tag{font-size:12px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--amber-dark)}
+.guide h3{font-size:16.5px;margin:5px 0 7px}
+.guide p{font-size:14px;color:#334155}
+.guide-link{margin-top:10px;font-size:14px;font-weight:700}
+.guide-link a{text-decoration:none}
+.guide-link a:hover{text-decoration:underline}
+/* ---------- FAQ ---------- */
+.faq{max-width:820px}
+.faq-item{background:#fff;border-radius:12px;box-shadow:var(--shadow);margin-bottom:10px;overflow:hidden}
+.faq-item button{width:100%;text-align:left;background:none;border:0;padding:16px 18px;font-size:15.5px;font-weight:700;font-family:inherit;color:var(--text);cursor:pointer;display:flex;justify-content:space-between;gap:12px;align-items:center}
+.faq-item button .chev{color:var(--amber-dark);font-size:20px;flex:none}
+.faq-item .answer{display:none;padding:0 18px 16px;font-size:14.5px;color:#334155}
+.faq-item.open .answer{display:block}
+.faq-item.open .chev{transform:rotate(45deg)}
+/* ---------- About / footer ---------- */
+.about{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:22px 20px}
+.about p{font-size:14.5px;color:#334155;margin-bottom:10px}
+footer{background:var(--navy);color:#94a3b8;margin-top:44px;padding:30px 0 26px}
+footer .cols{display:grid;grid-template-columns:1fr;gap:20px}
+@media(min-width:640px){footer .cols{grid-template-columns:2fr 1fr 1fr}}
+footer h4{color:#fff;font-size:15px;margin-bottom:10px}
+footer p,footer a{font-size:13.5px;color:#94a3b8;text-decoration:none}
+footer a:hover{color:#fff}
+footer ul{list-style:none}
+footer li{margin-bottom:6px}
+.copy{border-top:1px solid #1e293b;margin-top:22px;padding-top:16px;font-size:12.5px;text-align:center}
+/* ---------- Modal ---------- */
+.modal-backdrop{position:fixed;inset:0;background:rgba(15,23,42,.65);display:none;align-items:center;justify-content:center;z-index:100;padding:18px}
+.modal-backdrop.show{display:flex}
+.modal{background:#fff;border-radius:16px;max-width:560px;width:100%;max-height:82vh;overflow:auto;padding:24px 22px;position:relative}
+.modal h3{font-size:19px;margin-bottom:10px}
+.modal p{font-size:14.5px;color:#334155;margin-bottom:10px}
+.modal .close-x{position:absolute;top:12px;right:14px;background:#f1f5f9;border:0;border-radius:8px;width:34px;height:34px;font-size:18px;cursor:pointer;color:var(--text)}
+.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:var(--navy);color:#fff;padding:12px 18px;border-radius:999px;font-size:14px;box-shadow:0 8px 24px rgba(0,0,0,.3);opacity:0;pointer-events:none;transition:.25s;z-index:200;max-width:92vw;text-align:center}
+.toast.show{opacity:1}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-in">
+    <a class="brand" href="#top"><span class="mark">기</span><span><b>기계가공 <span>허브</span></b><small>motorwindinghub.github.io/machining-hub/</small></span></a>
+    <nav class="main-nav">
+      <a href="#calculators">계산기</a>
+      <a href="#reference">참고 표</a>
+      <a href="#guides">가이드</a>
+      <a href="#faq">자주 묻는 질문</a>
+    </nav>
+  </div>
+</header>
+
+<div class="hero" id="top">
+  <div class="wrap">
+    <h1>절삭가공 <span>계산기</span>와 실무 가이드</h1>
+    <p>기계가공 허브는 선반과 밀링, 드릴 가공 현장에서 바로 쓰는 무료 온라인 계산기입니다. 절삭속도와 스핀들 회전수, 이송속도, 가공 시간, 테일러 식 공구 수명, 절삭동력과 재료제거율을 브라우저에서 즉시 계산합니다. KS B와 KEC 기준, 한국 현장의 380V 3상 / 220V 단상, 60Hz 환경을 전제로 합니다.</p>
+    <div class="badges">
+      <span class="badge">5개 실무 계산기</span>
+      <span class="badge">KS B · KEC 기준</span>
+      <span class="badge">380V 3상 / 220V 단상 · 60Hz</span>
+      <span class="badge">가입 불필요 · 브라우저에서 즉시 계산</span>
+    </div>
+  </div>
+</div>
+
+<main class="wrap">
+
+<section id="calculators">
+  <h2><span class="bar">|</span> 가공 계산기</h2>
+  <p class="section-sub">측정값이나 계획값을 입력하고 계산 버튼을 누르면 결과가 즉시 표시됩니다. 모든 계산은 브라우저 안에서 이루어지며 어떤 정보도 서버로 전송되지 않습니다.</p>
+
+  <div class="calc-grid">
+
+  <!-- ============ 1. Cutting speed / spindle speed ============ -->
+  <div class="card" id="calc-speed">
+    <div class="tag">절삭속도</div>
+    <h3>절삭속도·회전수 계산기</h3>
+    <p class="desc">공구 직경과 절삭속도에서 스핀들 회전수를 구하고, 그 회전수에서 실제 절삭속도를 역산해 확인합니다.</p>
+    <div class="field"><label>공구 직경 D (mm)</label><input type="number" id="sD" value="10" min="0.1" step="0.1"></div>
+    <div class="field"><label>절삭속도 Vc (m/min)</label><input type="number" id="sVc" value="120" min="1" step="1"></div>
+    <div class="btn-row"><button class="btn" id="sCalc" type="button">회전수 계산</button></div>
+    <div class="results" id="sResults">
+      <h4>계산 결과</h4>
+      <div class="stat-grid">
+        <div class="stat hero"><div class="k">스핀들 회전수 N</div><div class="v" id="sN">—</div></div>
+        <div class="stat"><div class="k">절삭속도 확인값</div><div class="v" id="sVcCheck">—</div></div>
+        <div class="stat"><div class="k">공구 원주 (1회전)</div><div class="v" id="sCirc">—</div></div>
+      </div>
+      <p class="formula">공식: N = 1000 × Vc ÷ (π × D) · 확인값 Vc = π × D × N ÷ 1000. 단위: D는 mm, Vc는 m/min, N은 rpm입니다.</p>
+      <p class="note">계산된 회전수가 장비의 최고 회전수를 넘으면 절삭속도를 낮추거나 직경이 작은 공구를 선택하십시오. 공구 제조사의 권장 절삭속도 범위를 먼저 확인하는 것이 안전합니다.</p>
+    </div>
+  </div>
+
+  <!-- ============ 2. Feed rate ============ -->
+  <div class="card" id="calc-feed">
+    <div class="tag">이송속도</div>
+    <h3>이송속도 계산기</h3>
+    <p class="desc">날당 이송과 날 수, 회전수에서 회전당 이송과 분당 이송속도를 구합니다.</p>
+    <div class="field"><label>날당 이송 fz (mm/tooth)</label><input type="number" id="fFz" value="0.1" min="0.01" step="0.01"></div>
+    <div class="field"><label>날 수 z (개)</label><input type="number" id="fZ" value="4" min="1" step="1"></div>
+    <div class="field"><label>회전수 N (rpm)</label><input type="number" id="fN" value="3820" min="1" step="1"></div>
+    <div class="btn-row"><button class="btn" id="fCalc" type="button">이송속도 계산</button></div>
+    <div class="results" id="fResults">
+      <h4>계산 결과</h4>
+      <div class="stat-grid">
+        <div class="stat hero"><div class="k">이송속도 Vf</div><div class="v" id="fVf">—</div></div>
+        <div class="stat"><div class="k">회전당 이송 f</div><div class="v" id="fF">—</div></div>
+        <div class="stat"><div class="k">날당 이송 fz</div><div class="v" id="fFzOut">—</div></div>
+      </div>
+      <p class="formula">공식: f = fz × z · Vf = fz × z × N. 단위: fz와 f는 mm, Vf는 mm/min입니다.</p>
+      <p class="note">날당 이송이 너무 작으면 공구가 재료를 깎지 못하고 문지르게 되어 공구 마모와 표면 경화가 생깁니다. 반대로 너무 크면 절삭력이 커져 공구가 파손될 수 있습니다.</p>
+    </div>
+  </div>
+
+  <!-- ============ 3. Machining time ============ -->
+  <div class="card" id="calc-time">
+    <div class="tag">가공 시간</div>
+    <h3>가공 시간 계산기</h3>
+    <p class="desc">가공 길이와 이송속도, 패스 수에서 1패스 가공시간과 총 가공시간을 구합니다.</p>
+    <div class="field"><label>가공 길이 L (mm)</label><input type="number" id="tL" value="200" min="1" step="1"></div>
+    <div class="field"><label>이송속도 Vf (mm/min)</label><input type="number" id="tVf" value="1528" min="1" step="1"></div>
+    <div class="field"><label>패스 수 (회)</label><input type="number" id="tPass" value="1" min="1" step="1"></div>
+    <div class="btn-row"><button class="btn" id="tCalc" type="button">가공시간 계산</button></div>
+    <div class="results" id="tResults">
+      <h4>계산 결과</h4>
+      <div class="stat-grid">
+        <div class="stat hero"><div class="k">총 가공시간</div><div class="v" id="tTotal">—</div></div>
+        <div class="stat"><div class="k">1패스 가공시간 (분)</div><div class="v" id="tOneMin">—</div></div>
+        <div class="stat"><div class="k">1패스 가공시간 (초)</div><div class="v" id="tOneSec">—</div></div>
+        <div class="stat"><div class="k">패스 수</div><div class="v" id="tPassOut">—</div></div>
+      </div>
+      <p class="formula">공식: 1패스 시간 = L ÷ Vf · 총 시간 = 1패스 시간 × 패스 수. 단위: L은 mm, Vf는 mm/min입니다.</p>
+      <p class="note">실제 작업 시간에는 공구 진입과 이탈, 공구 교환, 측정 시간이 더해집니다. 이 계산기는 순수 절삭 시간만 보여주므로 견적에는 여유 시간을 반드시 더하십시오.</p>
+    </div>
+  </div>
+
+  <!-- ============ 4. Tool life (Taylor) ============ -->
+  <div class="card" id="calc-toollife">
+    <div class="tag">공구 수명</div>
+    <h3>공구 수명 계산기</h3>
+    <p class="desc">테일러 식 V × T^n = C 로 절삭속도에 따른 공구 수명과 예상 가공 개수를 구합니다.</p>
+    <div class="field"><label>절삭속도 V (m/min)</label><input type="number" id="tlV" value="120" min="1" step="1"></div>
+    <div class="field"><label>테일러 지수 n (0.1–0.5)</label><input type="number" id="tlN" value="0.25" min="0.1" max="0.5" step="0.01"></div>
+    <div class="field"><label>테일러 상수 C</label><input type="number" id="tlC" value="400" min="1" step="1"></div>
+    <div class="field"><label>개당 가공시간 (분)</label><input type="number" id="tlPer" value="8" min="0.1" step="0.1"></div>
+    <div class="btn-row"><button class="btn" id="tlCalc" type="button">공구 수명 계산</button></div>
+    <div class="results" id="tlResults">
+      <h4>계산 결과</h4>
+      <div class="stat-grid">
+        <div class="stat hero"><div class="k">공구 수명 T</div><div class="v" id="tlT">—</div></div>
+        <div class="stat"><div class="k">예상 가공 개수</div><div class="v" id="tlPieces">—</div></div>
+        <div class="stat"><div class="k">개당 가공시간</div><div class="v" id="tlPerOut">—</div></div>
+      </div>
+      <p class="formula">공식: T = (C ÷ V)^(1/n) · 예상 개수 = T ÷ 개당 가공시간. 테일러 식 V × T^n = C 에서 유도한 식입니다.</p>
+      <p class="note">테일러 지수 n과 상수 C는 공구 재질과 피삭재 조합마다 다릅니다. 초경 공구는 n이 0.2–0.3 수준이며, 정확한 값은 공구 제조사의 시험 자료를 확인하십시오.</p>
+    </div>
+  </div>
+
+  <!-- ============ 5. Cutting power ============ -->
+  <div class="card wide" id="calc-power">
+    <div class="tag">절삭동력</div>
+    <h3>절삭동력 계산기</h3>
+    <p class="desc">비절삭저항과 절삭 조건에서 절삭력, 절삭동력, 재료제거율을 함께 구합니다.</p>
+    <div class="field-row">
+      <div class="field"><label>비절삭저항 kc (N/mm²) <small>강 약 2000</small></label><input type="number" id="pKc" value="2000" min="1" step="1"></div>
+      <div class="field"><label>절삭 깊이 ap (mm)</label><input type="number" id="pAp" value="2" min="0.1" step="0.1"></div>
+      <div class="field"><label>회전당 이송 f (mm/rev)</label><input type="number" id="pF" value="0.4" min="0.01" step="0.01"></div>
+      <div class="field"><label>절삭속도 Vc (m/min)</label><input type="number" id="pVc" value="120" min="1" step="1"></div>
+      <div class="field"><label>절삭 폭 ae (mm)</label><input type="number" id="pAe" value="10" min="0.1" step="0.1"></div>
+      <div class="field"><label>공구 직경 D (mm)</label><input type="number" id="pD" value="10" min="0.1" step="0.1"></div>
+    </div>
+    <div class="btn-row"><button class="btn" id="pCalc" type="button">절삭동력 계산</button></div>
+    <div class="results" id="pResults">
+      <h4>계산 결과</h4>
+      <div class="stat-grid">
+        <div class="stat hero"><div class="k">절삭동력 Pc</div><div class="v" id="pPc">—</div></div>
+        <div class="stat"><div class="k">절삭력 Fc</div><div class="v" id="pFc">—</div></div>
+        <div class="stat"><div class="k">재료제거율 Q</div><div class="v" id="pQ">—</div></div>
+        <div class="stat"><div class="k">회전수 N</div><div class="v" id="pN">—</div></div>
+        <div class="stat"><div class="k">이송속도 Vf</div><div class="v" id="pVf">—</div></div>
+        <div class="stat"><div class="k">단위 면적당 동력</div><div class="v" id="pSpec">—</div></div>
+      </div>
+      <div class="verdict ok" id="pVerdict">—</div>
+      <p class="formula">공식: Fc = kc × ap × f · Pc = Fc × Vc ÷ 60000 · N = 1000 × Vc ÷ (π × D) · Vf = f × N · Q = ap × ae × Vf ÷ 1000. 단위: Pc는 kW, Q는 cm³/min입니다.</p>
+      <p class="note">계산된 절삭동력은 순수 절삭에 필요한 동력입니다. 실제 필요한 스핀들 출력은 기계 효율을 고려해 1.3–1.5배의 여유를 두는 것이 좋습니다.</p>
+    </div>
+  </div>
+
+  </div><!-- /calc-grid -->
+</section>
+
+<!-- ============ Reference table ============ -->
+<section id="reference">
+  <h2><span class="bar">|</span> 재질별 권장 절삭속도와 날당 이송</h2>
+  <p class="section-sub">초경 공구를 기준으로 한 일반적인 시작점입니다. 실제 조건은 공구 제조사의 권장 자료와 현장의 절삭 상태에 맞게 조정하십시오.</p>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>피삭재</th><th>권장 절삭속도 Vc (m/min)</th><th>권장 날당 이송 fz (mm/tooth)</th><th>비고</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>탄소강</td><td>120–200</td><td>0.08–0.15</td><td>일반 구조용 강 기준</td></tr>
+        <tr><td>합금강</td><td>80–150</td><td>0.08–0.12</td><td>경도에 따라 하한부터 시작</td></tr>
+        <tr><td>스테인리스강</td><td>60–120</td><td>0.06–0.10</td><td>가공경화 주의, 절삭유 필수</td></tr>
+        <tr><td>주철</td><td>80–150</td><td>0.10–0.20</td><td>건식 가공 가능, 분진 관리</td></tr>
+        <tr><td>알루미늄 합금</td><td>200–500</td><td>0.10–0.25</td><td>고속 가공 가능, 용착 주의</td></tr>
+        <tr><td>황동</td><td>200–400</td><td>0.10–0.20</td><td>절삭성 양호</td></tr>
+        <tr><td>티타늄 합금</td><td>30–60</td><td>0.05–0.08</td><td>저속·고이송, 냉각 중요</td></tr>
+        <tr><td>플라스틱</td><td>100–300</td><td>0.10–0.20</td><td>열에 의한 변형 주의</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="note">표의 값은 일반적인 시작점이며, 공구 형상과 코팅, 장비 강성, 절삭유 사용 여부에 따라 달라집니다. 처음 가공할 때는 범위의 하한에서 시작해 절삭 상태를 보면서 점차 높이는 것이 안전합니다.</p>
+</section>
+
+<!-- ============ Guides ============ -->
+<section id="guides">
+  <h2><span class="bar">|</span> 실무 가공 가이드</h2>
+  <p class="section-sub">선반과 밀링, 드릴 가공 현장에서 바로 참고할 수 있는 실무 해설입니다.</p>
+  <div class="guide-grid">
+    <div class="guide">
+      <div class="g-tag">선반 가공</div>
+      <h3>선반 가공 기초</h3>
+      <p>선반의 구조와 각 부위의 역할을 이해하고, 공구를 올바르게 설치한 뒤 기본 가공 순서에 따라 외경과 단면, 홈 가공을 진행하는 방법을 설명합니다. 초보자가 가장 먼저 알아야 할 선반 가공의 기본을 다룹니다.</p>
+      <p class="guide-link"><a href="guides/lathe-basics.html">전체 가이드 읽기 &rarr;</a></p>
+    </div>
+    <div class="guide">
+      <div class="g-tag">밀링 가공</div>
+      <h3>밀링 가공 기초</h3>
+      <p>밀링 머신의 구조와 평면, 측면, 홈 가공의 원리를 정리하고, 가공 목적에 맞는 커터를 선택하는 기준과 안전한 가공 순서를 설명합니다. 상향 절삭과 하향 절삭의 차이도 다룹니다.</p>
+      <p class="guide-link"><a href="guides/milling-basics.html">전체 가이드 읽기 &rarr;</a></p>
+    </div>
+    <div class="guide">
+      <div class="g-tag">드릴 가공</div>
+      <h3>드릴 가공과 구멍 정밀도</h3>
+      <p>드릴의 종류와 선택 기준, 센터 드릴부터 리머까지의 구멍 가공 순서를 설명하고, 위치 정밀도와 진원도, 표면 상태를 확보하는 실무 요령을 정리합니다.</p>
+      <p class="guide-link"><a href="guides/drilling-basics.html">전체 가이드 읽기 &rarr;</a></p>
+    </div>
+    <div class="guide">
+      <div class="g-tag">절삭공구</div>
+      <h3>절삭공구 선택과 재질</h3>
+      <p>고속도강과 초경, 세라믹, 다이아몬드 공구의 특성을 비교하고, 코팅의 역할과 피삭재에 맞는 공구 선택 기준을 설명합니다. 공구 수명을 늘리는 관리 방법도 함께 다룹니다.</p>
+      <p class="guide-link"><a href="guides/tool-selection.html">전체 가이드 읽기 &rarr;</a></p>
+    </div>
+    <div class="guide">
+      <div class="g-tag">정밀도</div>
+      <h3>가공 정밀도와 표면조도</h3>
+      <p>치수 정밀도와 형상 정밀도를 관리하는 방법, 표면조도에 영향을 주는 절삭 조건과 공구 형상의 관계를 설명합니다. 측정 방법과 오차의 원인, 개선 절차를 정리합니다.</p>
+      <p class="guide-link"><a href="guides/precision-surface-finish.html">전체 가이드 읽기 &rarr;</a></p>
+    </div>
+    <div class="guide">
+      <div class="g-tag">절삭유</div>
+      <h3>절삭유 선택과 관리</h3>
+      <p>수용성과 비수용성 절삭유의 종류와 특성, 가공 방식별 선택 기준을 설명하고, 농도 관리와 세균 억제, 폐유 처리까지 절삭유를 오래 안전하게 쓰는 관리 방법을 정리합니다.</p>
+      <p class="guide-link"><a href="guides/cutting-fluid.html">전체 가이드 읽기 &rarr;</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section id="faq">
+  <h2><span class="bar">|</span> 자주 묻는 질문</h2>
+  <p class="section-sub">절삭가공 현장에서 가장 자주 묻는 질문에 대한 간단한 답변입니다.</p>
+  <div class="faq">
+    <div class="faq-item">
+      <button type="button">절삭속도를 높이면 가공 시간이 줄지만 공구 수명은 어떻게 되나요? <span class="chev">+</span></button>
+      <div class="answer">절삭속도를 높이면 가공 시간은 줄지만 공구 수명은 테일러 식에 따라 급격히 짧아집니다. 예를 들어 테일러 지수가 0.25일 때 절삭속도를 20% 높이면 공구 수명은 절반 가까이 줄어듭니다. 따라서 속도를 올릴 때는 공구 교환 비용과 가공 시간 단축 효과를 함께 계산해 최적점을 찾는 것이 중요합니다.</div>
+    </div>
+    <div class="faq-item">
+      <button type="button">상향 절삭과 하향 절삭 중 어느 쪽이 좋은가요? <span class="chev">+</span></button>
+      <div class="answer">밀링에서는 하향 절삭이 일반적으로 유리합니다. 절삭 두께가 최대에서 시작해 0으로 줄어들어 절삭력이 안정되고 표면이 깨끗해지며, 칩이 공구 뒤로 배출되기 때문입니다. 다만 백래시가 큰 구형 장비에서는 공구가 재료를 끌어당기는 현상이 생길 수 있어 상향 절삭을 써야 할 때가 있습니다.</div>
+    </div>
+    <div class="faq-item">
+      <button type="button">스테인리스강 가공이 어려운 이유는 무엇인가요? <span class="chev">+</span></button>
+      <div class="answer">스테인리스강은 열전도율이 낮아 절삭열이 공구 날 끝에 집중되고, 가공경화가 심해 한 번 가공한 면이 단단해집니다. 그래서 절삭속도를 낮게 잡고 날당 이송을 충분히 주어 공구가 표면을 문지르지 않고 깎도록 하며, 절삭유를 충분히 공급해 열을 식혀야 합니다.</div>
+    </div>
+    <div class="faq-item">
+      <button type="button">드릴 구멍이 자꾸 커지거나 위치가 어긋나는 이유는 무엇인가요? <span class="chev">+</span></button>
+      <div class="answer">가장 흔한 원인은 센터 드릴을 생략하거나 드릴 날의 좌우 길이가 달라 한쪽 날만 깎는 경우입니다. 드릴이 휘거나 척에 편심이 있어도 구멍이 커집니다. 센터 드릴로 정확한 시작점을 만들고, 드릴 날을 대칭으로 연마하며, 척과 스핀들의 흔들림을 점검하면 대부분 해결됩니다.</div>
+    </div>
+    <div class="faq-item">
+      <button type="button">표면조도를 좋게 하려면 절삭 조건을 어떻게 조정해야 하나요? <span class="chev">+</span></button>
+      <div class="answer">표면조도는 주로 날당 이송과 공구 노즈 반경이 결정합니다. 이송을 줄이고 노즈 반경이 큰 공구를 쓰면 이론 표면조도가 좋아집니다. 절삭속도를 적절히 높여 구성인선을 줄이고, 마무리 패스에서는 절삭 깊이를 작게 잡는 것도 효과적입니다.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ About ============ -->
+<section id="about">
+  <div class="about">
+    <h2><span class="bar">|</span> 기계가공 허브 소개</h2>
+    <p>기계가공 허브는 선반과 밀링, 드릴 가공을 다루는 현장 기술자와 학생을 위한 무료 참고 사이트입니다. 계산기는 절삭가공의 표준 공식을 사용하며, 한국 현장의 380V 3상 / 220V 단상, 60Hz 환경을 전제로 하고 KS B와 KEC 기준을 참고합니다.</p>
+    <p><strong>면책 조항:</strong> 모든 계산 결과는 참고용 추정치입니다. 공구 제조사와 장비 제조사가 제공하는 권장 자료, 적용되는 국가 규격과 안전 규정을 대신하지 않으며, 숙련된 기술자의 판단을 대신할 수 없습니다. 실제 가공 전에 절삭 조건과 보호 설정을 반드시 장비 문서와 현장 규정에 따라 확인하십시오. 기계가공 허브는 이 계산을 근거로 한 작업에 대해 책임을 지지 않습니다.</p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <h4>기계가공 허브</h4>
+        <p>선반과 밀링, 드릴 가공 현장에서 바로 쓰는 무료 절삭가공 계산기와 실무 가이드. KS B · KEC 기준 · 380V 3상 / 220V 단상 · 60Hz.</p>
+        <p style="margin-top:8px">motorwindinghub.github.io/machining-hub/</p>
+      </div>
+      <div>
+        <h4>계산기</h4>
+        <ul>
+          <li><a href="#calc-speed">절삭속도·회전수 계산기</a></li>
+          <li><a href="#calc-feed">이송속도 계산기</a></li>
+          <li><a href="#calc-time">가공 시간 계산기</a></li>
+          <li><a href="#calc-toollife">공구 수명 계산기</a></li>
+          <li><a href="#calc-power">절삭동력 계산기</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>사이트</h4>
+        <ul>
+          <li><a href="#" data-modal="privacyModal">개인정보처리방침</a></li>
+          <li><a href="#" data-modal="aboutModal">소개</a></li>
+          <li><a href="#" data-modal="contactModal">문의</a></li>
+          <li><a href="#faq">자주 묻는 질문</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="copy">© 2026 기계가공 허브 · 모든 계산은 브라우저 안에서 이루어집니다 · 결과는 추정치이며 공구 제조사 자료와 현장 규정에 따라 확인하십시오.</div>
+  </div>
+</footer>
+
+<!-- Modals -->
+<div class="modal-backdrop" id="privacyModal">
+  <div class="modal">
+    <button class="close-x" data-close aria-label="Close">×</button>
+    <h3>개인정보처리방침</h3>
+    <p>기계가공 허브는 정적 웹사이트입니다. 개인정보를 수집하거나 저장하거나 전송하지 않습니다. 모든 계산기 입력값은 브라우저 안에서만 처리되며 어떤 서버로도 전송되지 않습니다.</p>
+    <p>이 사이트는 자체 쿠키를 사용하지 않으며 분석 도구도 사용하지 않습니다. 향후 광고가 게재되는 경우 제3자 업체가 방문 기록을 바탕으로 광고를 제공하기 위해 쿠키를 사용할 수 있으며, 브라우저 설정이나 업체의 광고 설정 페이지에서 맞춤형 광고를 언제든지 거부할 수 있습니다.</p>
+  </div>
+</div>
+<div class="modal-backdrop" id="aboutModal">
+  <div class="modal">
+    <button class="close-x" data-close aria-label="Close">×</button>
+    <h3>기계가공 허브 소개</h3>
+    <p>기계가공 허브는 절삭가공 현장에서 바로 쓸 수 있는 무료 브라우저 기반 계산기를 제공합니다. 절삭속도와 회전수, 이송속도, 가공 시간, 테일러 식 공구 수명, 절삭동력과 재료제거율을 계산할 수 있습니다.</p>
+    <p>계산은 절삭가공의 표준 공식을 따르며 한국 현장의 380V 3상 / 220V 단상, 60Hz 환경을 전제로 합니다. 이 사이트는 참고 자료이며, 공구 제조사와 장비 제조사의 문서나 숙련된 기술자의 판단을 대신하지 않습니다.</p>
+  </div>
+</div>
+<div class="modal-backdrop" id="contactModal">
+  <div class="modal">
+    <button class="close-x" data-close aria-label="Close">×</button>
+    <h3>문의</h3>
+    <p>잘못된 값이나 추가하고 싶은 계산기가 있으면 이 사이트의 GitHub 저장소를 통해 알려주십시오: <strong>github.com/motorwindinghub/motorwindinghub</strong> — 저장소에 이슈를 등록하면 검토하겠습니다.</p>
+    <p>현장 방문이 필요한 개별 가공 상담은 받지 않습니다. 실제 작업과 관련해서는 현장의 숙련된 기술자나 장비 제조사에 문의하십시오.</p>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+(function () {
+'use strict';
+
+/* ================= Pure math (exposed for testing) ================= */
+function calcSpeed(D, Vc) {
+  var N = 1000 * Vc / (Math.PI * D);
+  var vcCheck = Math.PI * D * N / 1000;
+  var circ = Math.PI * D;
+  return { N: N, vcCheck: vcCheck, circMm: circ };
+}
+function calcFeed(fz, z, N) {
+  var f = fz * z;
+  var Vf = fz * z * N;
+  return { f: f, Vf: Vf, fz: fz };
+}
+function calcTime(L, Vf, passes) {
+  var oneMin = L / Vf;
+  var oneSec = oneMin * 60;
+  return { oneMin: oneMin, oneSec: oneSec, totalMin: oneMin * passes, totalSec: oneSec * passes, passes: passes };
+}
+function calcToolLife(V, n, C, perPieceMin) {
+  var T = Math.pow(C / V, 1 / n);
+  var pieces = T / perPieceMin;
+  return { Tmin: T, pieces: pieces };
+}
+function calcPower(kc, ap, f, Vc, ae, D) {
+  var Fc = kc * ap * f;
+  var Pc = Fc * Vc / 60000;
+  var N = 1000 * Vc / (Math.PI * D);
+  var Vf = f * N;
+  var Q = ap * ae * Vf / 1000;
+  var spec = Q > 0 ? Pc / Q : 0;
+  return { Fc: Fc, Pc: Pc, N: N, Vf: Vf, Q: Q, specKwPerCm3: spec };
+}
+
+window.MCH = { calcSpeed: calcSpeed, calcFeed: calcFeed, calcTime: calcTime,
+  calcToolLife: calcToolLife, calcPower: calcPower };
+
+/* ================= DOM wiring ================= */
+function $(id) { return document.getElementById(id); }
+function num(id, def) { var v = parseFloat($(id).value); return isNaN(v) ? def : v; }
+function fmt(n, dec) {
+  if (n === null || n === undefined || !isFinite(n)) return '—';
+  return Number(n).toLocaleString('ko-KR', { minimumFractionDigits: dec === undefined ? 2 : dec, maximumFractionDigits: dec === undefined ? 2 : dec });
+}
+function fmtTime(min) {
+  var m = Math.floor(min);
+  var s = Math.round((min - m) * 60);
+  if (s === 60) { m += 1; s = 0; }
+  if (m > 0) return m + '분 ' + s + '초';
+  return s + '초';
+}
+var toastTimer = null;
+function showToast(msg) {
+  var t = $('toast'); t.textContent = msg; t.classList.add('show');
+  clearTimeout(toastTimer); toastTimer = setTimeout(function () { t.classList.remove('show'); }, 3200);
+}
+function needOk(vals) {
+  for (var i = 0; i < vals.length; i++) if (!(vals[i] > 0)) { showToast('모든 입력란에 0보다 큰 값을 입력해 주세요.'); return false; }
+  return true;
+}
+
+/* --- 1. Cutting speed --- */
+$('sCalc').addEventListener('click', function () {
+  var D = num('sD', 0), Vc = num('sVc', 0);
+  if (!needOk([D, Vc])) return;
+  var r = calcSpeed(D, Vc);
+  $('sN').textContent = fmt(r.N, 0) + ' rpm';
+  $('sVcCheck').textContent = fmt(r.vcCheck, 1) + ' m/min';
+  $('sCirc').textContent = fmt(r.circMm, 1) + ' mm';
+  $('sResults').classList.add('show');
+});
+
+/* --- 2. Feed rate --- */
+$('fCalc').addEventListener('click', function () {
+  var fz = num('fFz', 0), z = num('fZ', 0), N = num('fN', 0);
+  if (!needOk([fz, z, N])) return;
+  var r = calcFeed(fz, z, N);
+  $('fVf').textContent = fmt(r.Vf, 0) + ' mm/min';
+  $('fF').textContent = fmt(r.f, 2) + ' mm/rev';
+  $('fFzOut').textContent = fmt(r.fz, 2) + ' mm/tooth';
+  $('fResults').classList.add('show');
+});
+
+/* --- 3. Machining time --- */
+$('tCalc').addEventListener('click', function () {
+  var L = num('tL', 0), Vf = num('tVf', 0), passes = num('tPass', 0);
+  if (!needOk([L, Vf, passes])) return;
+  var r = calcTime(L, Vf, passes);
+  $('tTotal').textContent = fmtTime(r.totalMin) + ' (' + fmt(r.totalMin, 2) + '분)';
+  $('tOneMin').textContent = fmt(r.oneMin, 3) + ' 분';
+  $('tOneSec').textContent = fmt(r.oneSec, 1) + ' 초';
+  $('tPassOut').textContent = fmt(r.passes, 0) + ' 회';
+  $('tResults').classList.add('show');
+});
+
+/* --- 4. Tool life --- */
+$('tlCalc').addEventListener('click', function () {
+  var V = num('tlV', 0), n = num('tlN', 0), C = num('tlC', 0), per = num('tlPer', 0);
+  if (!needOk([V, n, C, per])) return;
+  if (n < 0.1 || n > 0.5) { showToast('테일러 지수 n은 0.1에서 0.5 사이의 값을 입력해 주세요.'); return; }
+  var r = calcToolLife(V, n, C, per);
+  $('tlT').textContent = fmt(r.Tmin, 1) + ' 분';
+  $('tlPieces').textContent = '약 ' + fmt(Math.floor(r.pieces), 0) + ' 개';
+  $('tlPerOut').textContent = fmt(per, 1) + ' 분/개';
+  $('tlResults').classList.add('show');
+});
+
+/* --- 5. Cutting power --- */
+$('pCalc').addEventListener('click', function () {
+  var kc = num('pKc', 0), ap = num('pAp', 0), f = num('pF', 0);
+  var Vc = num('pVc', 0), ae = num('pAe', 0), D = num('pD', 0);
+  if (!needOk([kc, ap, f, Vc, ae, D])) return;
+  var r = calcPower(kc, ap, f, Vc, ae, D);
+  $('pPc').textContent = fmt(r.Pc, 2) + ' kW';
+  $('pFc').textContent = fmt(r.Fc, 0) + ' N';
+  $('pQ').textContent = fmt(r.Q, 1) + ' cm³/min';
+  $('pN').textContent = fmt(r.N, 0) + ' rpm';
+  $('pVf').textContent = fmt(r.Vf, 0) + ' mm/min';
+  $('pSpec').textContent = fmt(r.specKwPerCm3, 3) + ' kW/(cm³/min)';
+  var verdict = $('pVerdict');
+  if (r.Pc <= 3.7) {
+    verdict.className = 'verdict ok';
+    verdict.textContent = '적합 — 계산된 절삭동력은 소형 스핀들(3.7kW급) 범위 안입니다. 실제 출력은 기계 효율을 고려해 여유를 두십시오.';
+  } else if (r.Pc <= 7.5) {
+    verdict.className = 'verdict warn';
+    verdict.textContent = '주의 — 중형 스핀들(7.5kW급)이 필요합니다. 절삭 깊이나 이송을 줄이면 동력을 낮출 수 있습니다.';
+  } else {
+    verdict.className = 'verdict bad';
+    verdict.textContent = '고동력 — 7.5kW를 넘는 절삭동력입니다. 장비의 정격 출력을 확인하고, 조건을 나누어 가공하는 것을 검토하십시오.';
+  }
+  $('pResults').classList.add('show');
+});
+
+/* --- FAQ accordion --- */
+document.querySelectorAll('.faq-item button').forEach(function (btn) {
+  btn.addEventListener('click', function () {
+    var item = btn.parentElement;
+    var wasOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(function (i) { i.classList.remove('open'); });
+    if (!wasOpen) item.classList.add('open');
+  });
+});
+
+/* --- Modals --- */
+document.querySelectorAll('[data-modal]').forEach(function (link) {
+  link.addEventListener('click', function (e) {
+    e.preventDefault();
+    $(link.getAttribute('data-modal')).classList.add('show');
+  });
+});
+document.querySelectorAll('.modal-backdrop').forEach(function (bd) {
+  bd.addEventListener('click', function (e) { if (e.target === bd) bd.classList.remove('show'); });
+  bd.querySelectorAll('[data-close]').forEach(function (b) {
+    b.addEventListener('click', function () { bd.classList.remove('show'); });
+  });
+});
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'Escape') document.querySelectorAll('.modal-backdrop.show').forEach(function (bd) { bd.classList.remove('show'); });
+});
+})();
+</script>
+</body>
+</html>
