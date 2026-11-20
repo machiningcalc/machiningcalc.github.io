@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>가공 정밀도와 표면조도 — 기계가공 허브</title>
+<meta name="description" content="치수 정밀도와 형상 정밀도를 관리하는 방법, 표면조도에 영향을 주는 절삭 조건과 공구 형상의 관계, 측정 방법과 오차의 원인, 개선 절차를 설명합니다.">
+<meta name="theme-color" content="#0f172a">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<style>
+:root{--navy:#0f172a;--navy2:#1e293b;--amber:#f59e0b;--amber-dark:#d97706;--amber-bg:#fef3c7;--bg:#f1f5f9;--card:#fff;--text:#0f172a;--muted:#64748b;--border:#e2e8f0;--green:#15803d;--green-bg:#dcfce7;--red:#b91c1c;--red-bg:#fee2e2;--radius:14px;--shadow:0 1px 3px rgba(15,23,42,.08),0 4px 14px rgba(15,23,42,.06)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.65}
+.wrap{max-width:860px;margin:0 auto;padding:0 16px}
+a{color:var(--amber-dark)}
+header{background:var(--navy);color:#fff;position:sticky;top:0;z-index:50;box-shadow:0 2px 10px rgba(0,0,0,.25)}
+.header-in{display:flex;align-items:center;gap:14px;padding:13px 16px;max-width:1080px;margin:0 auto;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:#fff;flex:1;min-width:200px}
+.brand .mark{width:38px;height:38px;border-radius:9px;background:var(--amber);color:var(--navy);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:19px;flex:none}
+.brand b{font-size:19px;letter-spacing:.2px}
+.brand b span{color:var(--amber)}
+.brand small{display:block;font-size:11.5px;color:#94a3b8;font-weight:400}
+nav.main-nav{display:flex;gap:4px;flex-wrap:wrap}
+nav.main-nav a{color:#cbd5e1;text-decoration:none;font-size:14px;font-weight:600;padding:8px 11px;border-radius:8px}
+nav.main-nav a:hover{background:var(--navy2);color:#fff}
+.article{padding:26px 0 12px}
+.back{margin-bottom:10px}
+.back a{font-weight:700;text-decoration:none}
+.back a:hover{text-decoration:underline}
+.crumb{font-size:12.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--amber-dark);margin-bottom:6px}
+.article h1{font-size:clamp(26px,4.5vw,34px);line-height:1.25;margin-bottom:10px}
+.lede{font-size:17px;color:#334155;margin-bottom:22px}
+.article h2{font-size:21px;margin:28px 0 8px;padding-top:6px;border-top:2px solid var(--amber);display:inline-block}
+.article h3{font-size:17px;margin:18px 0 6px}
+.article p{font-size:15.5px;color:#1e293b;margin-bottom:12px}
+.article ul,.article ol{margin:0 0 14px 22px;font-size:15.5px;color:#1e293b}
+.article li{margin-bottom:6px}
+.article table{border-collapse:collapse;width:100%;font-size:14px;margin:12px 0 16px;background:#fff;border-radius:10px;overflow:hidden;box-shadow:var(--shadow)}
+.article th{background:var(--navy);color:#fff;text-align:left;padding:10px 12px}
+.article td{padding:9px 12px;border-bottom:1px solid var(--border)}
+.article tr:nth-child(even) td{background:#f8fafc}
+.formula{font-size:13.5px;color:var(--muted);background:#fff;border:1px dashed var(--border);border-radius:8px;padding:10px 12px;margin:12px 0}
+.formula code{color:var(--navy);font-weight:600}
+.safety{background:var(--red-bg);border-left:4px solid var(--red);border-radius:10px;padding:14px 16px;margin:22px 0;font-size:14.5px;color:#7f1d1d}
+.related{background:var(--amber-bg);border:1px solid #fde68a;border-radius:12px;padding:16px 18px;margin:22px 0}
+.related h3{font-size:15px;margin:0 0 8px}
+.related ul{margin:0 0 0 20px}
+.related li{margin-bottom:4px}
+footer{background:var(--navy);color:#94a3b8;margin-top:44px;padding:30px 0 26px}
+footer .cols{display:grid;grid-template-columns:1fr;gap:20px}
+@media(min-width:640px){footer .cols{grid-template-columns:2fr 1fr 1fr}}
+footer h4{color:#fff;font-size:15px;margin-bottom:10px}
+footer p,footer a{font-size:13.5px;color:#94a3b8;text-decoration:none}
+footer a:hover{color:#fff}
+footer ul{list-style:none}
+footer li{margin-bottom:6px}
+.copy{border-top:1px solid #1e293b;margin-top:22px;padding-top:16px;font-size:12.5px;text-align:center}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-in">
+    <a class="brand" href="../index.html"><span class="mark">기</span><span><b>기계가공 <span>허브</span></b><small>motorwindinghub.github.io/machining-hub/</small></span></a>
+    <nav class="main-nav">
+      <a href="../index.html#calculators">계산기</a>
+      <a href="../index.html#reference">참고 표</a>
+      <a href="../index.html#guides">가이드</a>
+      <a href="../index.html#faq">자주 묻는 질문</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap article">
+  <p class="back"><a href="../index.html">&larr; 기계가공 허브로 돌아가기</a></p>
+  <p class="crumb">가이드 / 정밀도</p>
+  <h1>가공 정밀도와 표면조도</h1>
+  <p class="lede">기계 부품의 가치는 치수가 얼마나 정확한지, 표면이 얼마나 매끄러운지에 달려 있습니다. 베어링이 들어가는 구멍의 직경이 0.02밀리미터만 어긋나도 축이 흔들리고, 밀봉면의 표면이 거칠면 기름이 새어 나옵니다. 정밀도는 우연히 얻어지는 것이 아니라 장비와 공구, 절삭 조건, 측정 방법을 함께 관리할 때 비로소 안정됩니다. 이 가이드는 치수 정밀도와 형상 정밀도를 관리하는 방법, 표면조도에 영향을 주는 요소, 측정 방법과 오차의 원인, 정밀도를 개선하는 절차를 정리합니다.</p>
+
+  <h2>공차와 정밀도의 기본 개념</h2>
+  <p>도면의 치수에는 공차가 표시됩니다. 공차는 허용되는 오차의 범위로, 예를 들어 직경 50밀리미터에 공차가 플러스 0.02, 마이너스 0.01로 표시되면 실제 치수는 49.99에서 50.02밀리미터 사이여야 합니다. 공차가 엄격할수록 가공이 어렵고 비용이 높아지므로, 도면을 읽을 때는 어느 치수가 중요한지 먼저 파악해야 합니다. 조립에 영향을 주는 끼워맞춤 치수는 공차가 엄격하고, 외관 치수는 공차가 느슨한 경우가 많습니다. 끼워맞춤에는 헐거운 끼워맞춤과 중간 끼워맞춤, 억지 끼워맞춤이 있으며, KS B 규격에서 구멍과 축의 공차 등급을 정하고 있습니다.</p>
+  <p>정밀도는 치수 정밀도와 형상 정밀도로 나뉩니다. 치수 정밀도는 직경이나 길이 같은 크기가 도면과 얼마나 일치하는지를 말합니다. 형상 정밀도는 진원도와 원통도, 평면도, 직진도처럼 형상이 얼마나 올바른지를 말합니다. 치수가 맞아도 형상이 틀어지면 부품이 제대로 조립되지 않습니다. 예를 들어 구멍 직경이 맞아도 진원도가 나쁘면 베어링이 한쪽으로 쏠려 수명이 짧아집니다. 정밀도를 관리할 때는 치수와 형상을 함께 측정하고, 어느 쪽이 문제인지 구분하는 것이 중요합니다. 가공 전에 도면의 기하 공차를 확인하고, 측정 방법을 미리 정해 두는 습관이 필요합니다.</p>
+
+  <h2>표면조도의 의미와 표시</h2>
+  <p>표면조도는 가공된 표면의 거칠기를 나타내는 값으로, 보통 Ra 값으로 표시합니다. Ra는 표면의 평균 거칠기로, 단위는 마이크로미터입니다. Ra 3.2는 일반적인 절삭 가공 수준이고, Ra 1.6은 정삭 수준, Ra 0.8 이하는 연마에 가까운 수준입니다. 표면조도가 거칠면 마찰이 커지고 마모가 빠르며, 밀봉면에서는 누유가 생깁니다. 반대로 표면이 너무 매끄러우면 윤활유가 머무르지 않아 마찰이 오히려 커지는 경우도 있습니다. 도면에는 각 면마다 요구되는 Ra 값이 표시되며, 기능에 맞는 조도를 선택하는 것이 중요합니다.</p>
+  <p>표면조도는 표면조도 측정기로 측정합니다. 측정기는 촉침을 표면에 대고 이동하면서 요철을 측정해 Ra 값을 계산합니다. 측정 방향은 가공 방향과 직각으로 하는 것이 원칙이며, 측정 길이는 조도 수준에 따라 정해집니다. 현장에서는 표면조도 비교 견본과 눈으로 비교해 대략적인 수준을 확인하기도 합니다. 표면조도는 절삭 조건과 공구 형상, 공구 마모, 진동 등 여러 요소의 영향을 받습니다. 조도가 나쁘면 어느 요소가 문제인지 하나씩 확인해야 하며, 이송과 노즈 반경을 먼저 점검하는 것이 일반적입니다.</p>
+
+  <h2>표면조도에 영향을 주는 요소</h2>
+  <p>표면조도에 가장 큰 영향을 주는 것은 날당 이송과 공구 노즈 반경입니다. 이론 표면조도는 이송의 제곱에 비례하고 노즈 반경에 반비례합니다. 이송을 절반으로 줄이면 이론 조도는 네 배 좋아지고, 노즈 반경을 두 배로 키우면 조도는 두 배 좋아집니다. 그래서 정삭에서는 이송을 낮추고 노즈 반경이 큰 인서트를 씁니다. 다만 노즈 반경이 너무 크면 절삭력이 커져 진동이 생길 수 있으므로, 장비 강성에 맞는 크기를 선택해야 합니다. 절삭속도도 조도에 영향을 줍니다. 절삭속도가 너무 낮으면 구성인선이 생겨 표면이 거칠어지고, 적절히 높이면 구성인선이 사라져 표면이 깨끗해집니다.</p>
+  <p>공구 마모와 진동도 표면조도를 나쁘게 만듭니다. 날이 마모되면 절삭이 불안정해져 표면에 울퉁불퉁한 자국이 생깁니다. 공구 돌출이 길거나 공작물 고정이 약하면 진동이 생겨 표면에 물결 자국이 남습니다. 절삭유가 부족하면 절삭열이 높아져 표면이 거칠어지고, 칩이 표면을 긁어 자국을 남기기도 합니다. 재질도 조도에 영향을 줍니다. 알루미늄처럼 부드러운 재질은 구성인선이 생기기 쉽고, 스테인리스강은 가공경화로 표면이 거칠어지기 쉽습니다. 조도를 개선하려면 이송과 노즈 반경, 절삭속도, 공구 상태, 진동을 순서대로 점검하는 것이 효과적입니다.</p>
+
+  <h2>정밀도에 영향을 주는 오차 요인</h2>
+  <p>가공 정밀도에 영향을 주는 오차는 장비와 공구, 공작물, 환경에서 발생합니다. 장비 오차는 스핀들 흔들림과 이송 나사 백래시, 베드 마모처럼 장비 자체의 문제에서 옵니다. 스핀들 흔들림이 크면 가공면이 물결치고, 백래시가 크면 위치가 어긋납니다. 공구 오차는 공구 마모와 공구 높이, 공구 돌출에서 옵니다. 공구가 마모되면 치수가 점차 변하고, 공구 높이가 맞지 않으면 단면 중심에 돌기가 생깁니다. 공작물 오차는 고정 방법과 재질의 내부 응력에서 옵니다. 얇은 공작물을 강하게 조이면 변형되고, 내부 응력이 있는 재질은 가공 뒤에 휘어집니다.</p>
+  <p>환경 오차는 온도와 진동에서 옵니다. 공작물과 장비는 온도에 따라 팽창하므로, 아침과 오후의 온도가 다르면 치수가 달라질 수 있습니다. 강은 섭씨 1도마다 1미터당 약 0.011밀리미터씩 팽창하므로, 정밀 가공에서는 작업장 온도를 일정하게 유지하는 것이 중요합니다. 가공 직후의 공작물은 절삭열로 팽창해 있으므로, 식은 뒤에 측정해야 정확한 치수를 얻을 수 있습니다. 근처 장비의 진동도 가공면에 영향을 줍니다. 정밀 가공을 할 때는 측정실의 온도를 20도로 유지하고, 측정 전에 공작물을 충분히 식히는 것이 원칙입니다.</p>
+
+  <h2>측정 방법과 측정기 선택</h2>
+  <p>정밀도를 관리하려면 올바른 측정기를 선택하고 올바르게 사용해야 합니다. 버니어 캘리퍼스는 0.02밀리미터까지 측정할 수 있어 일반적인 치수 확인에 쓰입니다. 마이크로미터는 0.01밀리미터까지 측정할 수 있어 외경과 두께의 정밀 측정에 쓰입니다. 내경 마이크로미터와 실린더 게이지는 구멍 직경을 측정하는 데 쓰입니다. 다이얼 게이지는 흔들림과 평면도, 진원도를 측정하는 데 쓰입니다. 높이 게이지는 단차와 위치를 측정하는 데 쓰입니다. 3차원 측정기는 복잡한 형상의 치수와 기하 공차를 정밀하게 측정할 수 있어 검사실의 표준 장비입니다.</p>
+  <p>측정기를 사용할 때는 측정 전에 영점을 확인하고, 측정면을 깨끗이 닦아야 합니다. 측정 압력이 너무 세면 얇은 부위가 눌려 오차가 생기고, 너무 약하면 접촉이 불안정해집니다. 같은 치수를 여러 번 측정해 반복성을 확인하는 것이 좋으며, 측정값이 들쭉날쭉하면 측정 방법이나 측정기에 문제가 있는 것입니다. 측정기는 정기적으로 교정해야 하며, 교정 기한이 지난 측정기로 측정한 결과는 신뢰할 수 없습니다. 측정 결과를 기록해 두면 가공 조건과 정밀도의 관계를 파악할 수 있어 품질 개선에 도움이 됩니다.</p>
+
+  <h2>정밀도 개선 절차</h2>
+  <p>정밀도가 나쁘면 원인을 단계적으로 찾아야 합니다. 먼저 측정 방법이 올바른지 확인합니다. 측정기가 교정되어 있는지, 측정 압력과 측정 위치가 일정한지 점검합니다. 다음으로 장비 상태를 확인합니다. 스핀들 흔들림과 백래시, 테이블의 수평을 점검하고, 이상이 있으면 수리하거나 조정합니다. 그 다음으로 공구 상태를 확인합니다. 공구 마모와 공구 높이, 공구 돌출을 점검하고, 마모된 공구는 교환합니다. 마지막으로 절삭 조건을 확인합니다. 절삭 깊이와 이송, 절삭속도가 적정한지 검토하고, 황삭과 정삭을 나누어 가공합니다.</p>
+  <p>정밀도를 안정적으로 유지하려면 가공 순서를 표준화하는 것이 중요합니다. 같은 부품을 만들 때는 항상 같은 순서와 같은 조건으로 가공하면 품질이 일정해집니다. 황삭 뒤에는 공작물을 식히고 응력을 제거한 뒤 정삭을 하면 치수가 안정됩니다. 정삭은 여유를 조금씩 나누어 여러 패스로 진행하면 공구 마모의 영향을 줄일 수 있습니다. 가공 기록을 남겨 조건과 결과를 연결하면, 문제가 생겼을 때 원인을 빠르게 찾을 수 있습니다. 정밀 가공은 한 번의 노력으로 얻어지는 것이 아니라, 측정과 기록, 개선을 반복하는 과정에서 얻어지는 결과입니다.</p>
+
+  <p>정밀 가공에서 온도의 영향을 줄이는 방법도 알아두어야 합니다. 강은 섭씨 1도마다 1미터당 약 0.011밀리미터씩 팽창하므로, 길이 100밀리미터의 부품은 온도가 5도만 달라져도 0.005밀리미터 이상 치수가 변합니다. 정밀 부품을 가공할 때는 작업장 온도를 20도 근처로 유지하고, 공작물과 측정기를 같은 환경에 두어 온도를 맞추는 것이 원칙입니다. 가공 중에는 절삭열로 공작물이 팽창하므로, 정삭 전에 공작물을 식히고, 측정도 식은 뒤에 해야 합니다. 장비 자체도 가동하면서 따뜻해지므로, 정밀 가공을 시작하기 전에 장비를 충분히 예열해 열 변형이 안정된 상태에서 가공하는 것이 좋습니다. 온도 기록을 남기면 계절에 따른 치수 변화를 파악하는 데 도움이 됩니다.</p>
+
+  <table>
+    <tr><th>표면조도 Ra (㎛)</th><th>가공 방법</th><th>적용 부위</th><th>비고</th></tr>
+    <tr><td>12.5–25</td><td>황삭</td><td>비접촉 외관면</td><td>거친 가공 수준</td></tr>
+    <tr><td>6.3</td><td>일반 절삭</td><td>일반 조립면</td><td>보통의 가공 수준</td></tr>
+    <tr><td>3.2</td><td>정삭</td><td>일반 접촉면</td><td>흔한 요구 수준</td></tr>
+    <tr><td>1.6</td><td>정밀 정삭</td><td>베어링 접촉면</td><td>정삭 조건 필요</td></tr>
+    <tr><td>0.8</td><td>연삭</td><td>밀봉면, 축 경면</td><td>연삭 가공 필요</td></tr>
+    <tr><td>0.4 이하</td><td>정밀 연삭, 래핑</td><td>정밀 밀봉면</td><td>특수 가공 필요</td></tr>
+  </table>
+
+  <h2>단계별 정밀도 관리 절차</h2>
+  <ol>
+    <li><strong>도면 확인.</strong> 공차와 기하 공차, 표면조도 요구 수준을 확인합니다.</li>
+    <li><strong>측정기 준비.</strong> 필요한 측정기를 준비하고 영점과 교정 상태를 확인합니다.</li>
+    <li><strong>장비 점검.</strong> 스핀들 흔들림과 백래시, 테이블 수평을 점검합니다.</li>
+    <li><strong>공구 점검.</strong> 공구 마모와 높이, 돌출을 확인하고 필요하면 교환합니다.</li>
+    <li><strong>황삭 가공.</strong> 여유를 남기고 가공한 뒤 공작물을 식힙니다.</li>
+    <li><strong>중간 측정.</strong> 황삭 뒤 치수를 측정해 남은 여유를 확인합니다.</li>
+    <li><strong>정삭 가공.</strong> 여유를 나누어 여러 패스로 최종 치수에 다가갑니다.</li>
+    <li><strong>최종 측정.</strong> 모든 치수와 형상, 표면조도를 측정합니다.</li>
+    <li><strong>기록 보관.</strong> 측정 결과와 가공 조건을 기록해 보관합니다.</li>
+  </ol>
+
+  <h2>흔한 문제와 원인</h2>
+  <ul>
+    <li><strong>치수가 들쭉날쭉함:</strong> 측정 방법이나 장비 백래시가 원인. 측정 방법을 통일하고 백래시를 점검합니다.</li>
+    <li><strong>표면에 물결 자국:</strong> 진동이 원인입니다. 공구 돌출을 줄이고 고정을 강화합니다.</li>
+    <li><strong>진원도가 나쁨:</strong> 공구 마모나 스핀들 흔들림이 원인. 공구를 교환하고 스핀들을 점검합니다.</li>
+    <li><strong>가공 뒤 치수가 변함:</strong> 열팽창이나 내부 응력이 원인. 식힌 뒤 측정하고 응력을 제거합니다.</li>
+  </ul>
+
+  <h2>자주 묻는 질문</h2>
+  <h3>표면조도를 좋게 하려면 무엇을 먼저 바꿔야 하나요?</h3>
+  <p>이송을 줄이고 노즈 반경이 큰 공구를 쓰는 것이 가장 효과적입니다. 이론 표면조도는 이송의 제곱에 비례하므로 이송을 절반으로 줄이면 조도가 네 배 좋아집니다. 그 다음으로 절삭속도를 적절히 높여 구성인선을 줄이고, 공구 마모를 확인합니다.</p>
+  <h3>치수는 맞는데 조립이 안 되는 이유는 무엇인가요?</h3>
+  <p>치수 정밀도는 맞지만 형상 정밀도가 나쁜 경우입니다. 구멍 직경이 맞아도 진원도가 나쁘면 베어링이 들어가지 않고, 평면의 평면도가 나쁘면 접촉면이 들뜹니다. 치수와 함께 진원도와 평면도 같은 기하 공차를 함께 측정해야 원인을 찾을 수 있습니다.</p>
+  <h3>측정할 때마다 값이 다른 이유는 무엇인가요?</h3>
+  <p>측정 방법이나 측정기, 온도가 일정하지 않기 때문입니다. 측정 압력과 측정 위치를 통일하고, 측정 전에 영점을 확인하며, 공작물을 식힌 뒤에 측정하면 반복성이 좋아집니다. 측정기가 교정 기한을 넘었는지도 확인해야 합니다.</p>
+
+  <div class="safety"><strong>안전 주의:</strong> 정밀 측정기는 충격에 약하고 값이 비쌉니다. 측정기를 떨어뜨리거나 가공 칩이 있는 곳에 두지 말고, 사용 뒤에는 깨끗이 닦아 전용 보관함에 보관합니다.</div>
+
+  <div class="related">
+    <h3>관련 계산기</h3>
+    <ul>
+      <li><a href="../index.html#calc-feed">이송속도 계산기</a> — 표면조도에 맞는 이송 구하기</li>
+      <li><a href="../index.html#calc-speed">절삭속도·회전수 계산기</a> — 절삭속도와 회전수 구하기</li>
+      <li><a href="../index.html#calc-time">가공 시간 계산기</a> — 정삭 패스 시간 견적하기</li>
+    </ul>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <h4>기계가공 허브</h4>
+        <p>선반과 밀링, 드릴 가공 현장에서 바로 쓰는 무료 절삭가공 계산기와 실무 가이드. KS B · KEC 기준 · 380V 3상 / 220V 단상 · 60Hz.</p>
+        <p style="margin-top:8px">motorwindinghub.github.io/machining-hub/</p>
+      </div>
+      <div>
+        <h4>계산기</h4>
+        <ul>
+          <li><a href="../index.html#calc-speed">절삭속도·회전수 계산기</a></li>
+          <li><a href="../index.html#calc-feed">이송속도 계산기</a></li>
+          <li><a href="../index.html#calc-time">가공 시간 계산기</a></li>
+          <li><a href="../index.html#calc-toollife">공구 수명 계산기</a></li>
+          <li><a href="../index.html#calc-power">절삭동력 계산기</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>가이드</h4>
+        <ul>
+          <li><a href="lathe-basics.html">선반 가공 기초</a></li>
+          <li><a href="milling-basics.html">밀링 가공 기초</a></li>
+          <li><a href="drilling-basics.html">드릴 가공과 구멍 정밀도</a></li>
+          <li><a href="tool-selection.html">절삭공구 선택과 재질</a></li>
+          <li><a href="precision-surface-finish.html">가공 정밀도와 표면조도</a></li>
+          <li><a href="cutting-fluid.html">절삭유 선택과 관리</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="copy">© 2026 기계가공 허브 · 모든 계산은 브라우저 안에서 이루어집니다 · 결과는 추정치이며 공구 제조사 자료와 현장 규정에 따라 확인하십시오.</div>
+  </div>
+</footer>
+
+</body>
+</html>

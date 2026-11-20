@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>절삭공구 선택과 재질 — 기계가공 허브</title>
+<meta name="description" content="고속도강과 초경, 세라믹, 다이아몬드 공구의 특성을 비교하고 코팅의 역할과 피삭재에 맞는 공구 선택 기준, 공구 수명 관리 방법을 설명합니다.">
+<meta name="theme-color" content="#0f172a">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<style>
+:root{--navy:#0f172a;--navy2:#1e293b;--amber:#f59e0b;--amber-dark:#d97706;--amber-bg:#fef3c7;--bg:#f1f5f9;--card:#fff;--text:#0f172a;--muted:#64748b;--border:#e2e8f0;--green:#15803d;--green-bg:#dcfce7;--red:#b91c1c;--red-bg:#fee2e2;--radius:14px;--shadow:0 1px 3px rgba(15,23,42,.08),0 4px 14px rgba(15,23,42,.06)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.65}
+.wrap{max-width:860px;margin:0 auto;padding:0 16px}
+a{color:var(--amber-dark)}
+header{background:var(--navy);color:#fff;position:sticky;top:0;z-index:50;box-shadow:0 2px 10px rgba(0,0,0,.25)}
+.header-in{display:flex;align-items:center;gap:14px;padding:13px 16px;max-width:1080px;margin:0 auto;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:#fff;flex:1;min-width:200px}
+.brand .mark{width:38px;height:38px;border-radius:9px;background:var(--amber);color:var(--navy);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:19px;flex:none}
+.brand b{font-size:19px;letter-spacing:.2px}
+.brand b span{color:var(--amber)}
+.brand small{display:block;font-size:11.5px;color:#94a3b8;font-weight:400}
+nav.main-nav{display:flex;gap:4px;flex-wrap:wrap}
+nav.main-nav a{color:#cbd5e1;text-decoration:none;font-size:14px;font-weight:600;padding:8px 11px;border-radius:8px}
+nav.main-nav a:hover{background:var(--navy2);color:#fff}
+.article{padding:26px 0 12px}
+.back{margin-bottom:10px}
+.back a{font-weight:700;text-decoration:none}
+.back a:hover{text-decoration:underline}
+.crumb{font-size:12.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--amber-dark);margin-bottom:6px}
+.article h1{font-size:clamp(26px,4.5vw,34px);line-height:1.25;margin-bottom:10px}
+.lede{font-size:17px;color:#334155;margin-bottom:22px}
+.article h2{font-size:21px;margin:28px 0 8px;padding-top:6px;border-top:2px solid var(--amber);display:inline-block}
+.article h3{font-size:17px;margin:18px 0 6px}
+.article p{font-size:15.5px;color:#1e293b;margin-bottom:12px}
+.article ul,.article ol{margin:0 0 14px 22px;font-size:15.5px;color:#1e293b}
+.article li{margin-bottom:6px}
+.article table{border-collapse:collapse;width:100%;font-size:14px;margin:12px 0 16px;background:#fff;border-radius:10px;overflow:hidden;box-shadow:var(--shadow)}
+.article th{background:var(--navy);color:#fff;text-align:left;padding:10px 12px}
+.article td{padding:9px 12px;border-bottom:1px solid var(--border)}
+.article tr:nth-child(even) td{background:#f8fafc}
+.formula{font-size:13.5px;color:var(--muted);background:#fff;border:1px dashed var(--border);border-radius:8px;padding:10px 12px;margin:12px 0}
+.formula code{color:var(--navy);font-weight:600}
+.safety{background:var(--red-bg);border-left:4px solid var(--red);border-radius:10px;padding:14px 16px;margin:22px 0;font-size:14.5px;color:#7f1d1d}
+.related{background:var(--amber-bg);border:1px solid #fde68a;border-radius:12px;padding:16px 18px;margin:22px 0}
+.related h3{font-size:15px;margin:0 0 8px}
+.related ul{margin:0 0 0 20px}
+.related li{margin-bottom:4px}
+footer{background:var(--navy);color:#94a3b8;margin-top:44px;padding:30px 0 26px}
+footer .cols{display:grid;grid-template-columns:1fr;gap:20px}
+@media(min-width:640px){footer .cols{grid-template-columns:2fr 1fr 1fr}}
+footer h4{color:#fff;font-size:15px;margin-bottom:10px}
+footer p,footer a{font-size:13.5px;color:#94a3b8;text-decoration:none}
+footer a:hover{color:#fff}
+footer ul{list-style:none}
+footer li{margin-bottom:6px}
+.copy{border-top:1px solid #1e293b;margin-top:22px;padding-top:16px;font-size:12.5px;text-align:center}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-in">
+    <a class="brand" href="../index.html"><span class="mark">기</span><span><b>기계가공 <span>허브</span></b><small>motorwindinghub.github.io/machining-hub/</small></span></a>
+    <nav class="main-nav">
+      <a href="../index.html#calculators">계산기</a>
+      <a href="../index.html#reference">참고 표</a>
+      <a href="../index.html#guides">가이드</a>
+      <a href="../index.html#faq">자주 묻는 질문</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap article">
+  <p class="back"><a href="../index.html">&larr; 기계가공 허브로 돌아가기</a></p>
+  <p class="crumb">가이드 / 절삭공구</p>
+  <h1>절삭공구 선택과 재질</h1>
+  <p class="lede">좋은 가공은 좋은 공구에서 시작합니다. 같은 선반과 같은 조건으로 가공해도 공구가 다르면 표면과 치수, 공구 수명이 크게 달라집니다. 절삭공구는 재질과 형상, 코팅에 따라 특성이 다르며, 피삭재에 맞는 공구를 선택하는 것이 가공 품질과 생산성을 좌우합니다. 이 가이드는 고속도강과 초경, 세라믹, 다이아몬드 공구의 특성을 비교하고, 코팅의 역할과 선택 기준, 공구 수명을 늘리는 관리 방법을 정리합니다. 공구 카탈로그를 읽는 눈을 기르면 현장에서의 선택이 훨씬 쉬워집니다.</p>
+
+  <h2>공구 재질의 종류와 특성</h2>
+  <p>고속도강은 가장 오래된 공구 재질로, 값이 싸고 충격에 강하며 다시 연마해 쓸 수 있다는 장점이 있습니다. 고속도강은 절삭속도가 초경보다 낮지만, 날을 예리하게 만들 수 있어 알루미늄과 플라스틱처럼 부드러운 재질의 마무리 가공에 적합합니다. 드릴과 탭, 리머처럼 형상이 복잡한 공구는 대부분 고속도강으로 만듭니다. 고속도강의 단점은 고온에 약하다는 것으로, 절삭열이 높아지면 경도가 떨어져 날이 빨리 마모됩니다. 그래서 고속도강 공구는 절삭속도를 낮게 잡고 절삭유를 충분히 공급하며 사용합니다.</p>
+  <p>초경은 텅스텐 카바이드 입자를 코발트로 결합한 재질로, 현재 절삭가공에서 가장 많이 쓰입니다. 초경은 고속도강보다 훨씬 단단하고 고온에도 경도를 유지하므로 절삭속도를 3배에서 5배까지 높일 수 있습니다. 초경 공구는 대부분 인서트 형태로 만들어져 날이 마모되면 인서트만 교환하면 됩니다. 단점은 충격에 약해 깨지기 쉽다는 것으로, 단속 절삭이나 진동이 큰 가공에서는 파손될 수 있습니다. 세라믹 공구는 초경보다 더 단단하고 고온에 강해 주철과 경화강의 고속 가공에 쓰입니다. 다만 세라믹은 충격에 매우 약하므로 연속 절삭에만 사용합니다. 다이아몬드 공구는 가장 단단하며 알루미늄과 구리, 플라스틱의 정밀 가공에 쓰이지만, 철을 가공하면 다이아몬드가 철과 반응해 마모되므로 철강에는 쓸 수 없습니다.</p>
+
+  <h2>코팅의 역할과 종류</h2>
+  <p>코팅은 공구 표면에 얇은 막을 입혀 마모를 줄이고 열을 차단하는 기술입니다. 코팅된 공구는 코팅되지 않은 공구보다 수명이 2배에서 5배 길어지는 경우가 많습니다. 티타늄 질화물 코팅은 황금색을 띠며 마찰이 적고 범용성이 높아 가장 많이 쓰입니다. 티타늄 알루미늄 질화물 코팅은 고온에 강해 건식 가공과 고속 가공에 적합합니다. 알루미늄 산화물 코팅은 열 차단 효과가 뛰어나 고속 절삭에 쓰입니다. 다이아몬드 코팅은 알루미늄과 흑연, 복합재 가공에 쓰이며 마모에 매우 강합니다.</p>
+  <p>코팅을 선택할 때는 피삭재와 가공 방식을 고려합니다. 강을 가공할 때는 티타늄 알루미늄 질화물 코팅이 고온에 강해 유리하고, 스테인리스강을 가공할 때는 마찰이 적은 코팅이 칩의 용착을 막아줍니다. 알루미늄을 가공할 때는 코팅이 없는 연마된 공구가 오히려 칩이 달라붙지 않아 좋은 경우가 많습니다. 코팅은 공구 수명을 늘려주지만, 코팅이 벗겨지면 그 아래 모재가 드러나 급격히 마모되므로, 코팅 상태를 주기적으로 확인해야 합니다. 코팅된 인서트는 다시 연마해 쓸 수 없으므로, 날이 마모되면 새 인서트로 교환합니다. 공구 제조사의 코팅 권장표를 참고하면 선택이 쉬워집니다.</p>
+
+  <h2>인서트 형상과 노즈 반경</h2>
+  <p>선반과 밀링의 초경 공구는 대부분 교체식 인서트를 사용합니다. 인서트는 삼각형과 사각형, 마름모, 원형 등 다양한 형상이 있으며, 형상에 따라 사용할 수 있는 절삭 방향과 강도가 달라집니다. 삼각형 인서트는 날이 세 개라 경제적이지만 강도가 낮고, 사각형 인서트는 날이 네 개이고 강도가 높아 황삭에 적합합니다. 마름모 인서트는 예리한 각도로 정밀 가공에 쓰이고, 원형 인서트는 강도가 가장 높아 거친 황삭과 곡면 가공에 쓰입니다. 인서트를 선택할 때는 가공 형상과 절삭 깊이, 장비 강성을 함께 고려합니다.</p>
+  <p>노즈 반경은 인서트 날 끝의 둥근 정도로, 표면조도와 절삭력에 직접 영향을 줍니다. 노즈 반경이 크면 표면이 깨끗해지지만 절삭력이 커지고 진동이 생기기 쉽습니다. 노즈 반경이 작으면 절삭력은 작지만 표면이 거칠어집니다. 정삭에서는 노즈 반경이 0.8밀리미터 이상인 인서트를 쓰고, 황삭에서는 0.4밀리미터 수준을 씁니다. 노즈 반경은 절삭 깊이보다 작아야 하며, 절삭 깊이가 노즈 반경보다 얕으면 공구가 재료를 깎지 못하고 문지르게 됩니다. 인서트에는 칩 브레이커라는 홈이 있어 칩을 짧게 부수는 역할을 합니다. 칩 브레이커의 형상은 이송 범위에 따라 다르므로, 사용하는 이송에 맞는 인서트를 선택해야 합니다.</p>
+
+  <h2>피삭재에 맞는 공구 선택</h2>
+  <p>피삭재별로 적합한 공구 재질과 형상이 다릅니다. 탄소강은 초경 공구로 가공하는 것이 일반적이며, 절삭속도는 분당 120에서 200미터가 시작점입니다. 합금강은 경도가 높아 절삭속도를 낮추고 인성이 좋은 초경 등급을 선택합니다. 스테인리스강은 가공경화가 심하므로 날이 예리하고 코팅이 된 인서트를 쓰며, 절삭속도를 낮게 잡고 이송을 충분히 줍니다. 주철은 마모성이 강해 내마모성이 좋은 초경이나 세라믹 공구가 적합하며, 건식 가공도 가능합니다.</p>
+  <p>알루미늄 합금은 부드럽고 열전도율이 높아 고속 가공이 가능하지만, 칩이 날에 달라붙기 쉬우므로 연마된 날과 넓은 칩 배출 공간이 필요합니다. 황동은 절삭성이 좋아 고속도강 공구로도 충분히 가공할 수 있습니다. 티타늄 합금은 열전도율이 낮아 절삭열이 날 끝에 집중되므로, 절삭속도를 분당 30에서 60미터로 낮게 잡고 냉각을 충분히 해야 합니다. 플라스틱은 열에 약하므로 날이 예리한 공구와 낮은 회전수를 사용합니다. 공구 제조사의 재질별 권장표를 참고하면 피삭재에 맞는 공구 등급과 절삭 조건을 빠르게 찾을 수 있습니다.</p>
+
+  <h2>공구 수명과 마모 관리</h2>
+  <p>공구 수명은 테일러 식으로 예측할 수 있습니다. 절삭속도를 높이면 가공 시간은 줄지만 공구 수명은 급격히 짧아지므로, 속도와 수명의 균형점을 찾는 것이 중요합니다. 이 사이트의 공구 수명 계산기에 절삭속도와 테일러 상수를 입력하면 예상 수명과 가공 개수를 구할 수 있습니다. 공구 마모는 날 끝의 여유면에서 천천히 진행되며, 마모 폭이 0.3밀리미터를 넘으면 교환 시점으로 봅니다. 마모된 공구를 계속 쓰면 치수가 어긋나고 표면이 나빠지며, 심하면 공구가 파손되어 공작물을 망칠 수 있습니다.</p>
+  <p>공구 수명을 늘리려면 절삭 조건을 적정하게 유지하고, 절삭유를 충분히 공급하며, 공구를 올바르게 보관해야 합니다. 공구를 떨어뜨리거나 서로 부딪히면 날이 깨지므로, 전용 보관함에 따로 보관합니다. 인서트는 교환 시기를 기록해 두면 같은 조건에서의 수명을 파악할 수 있어 생산 계획에 도움이 됩니다. 공구 파손이 자주 일어나면 절삭 조건이나 공구 형상, 장비 강성 중 어느 것이 문제인지 원인을 찾아야 합니다. 절삭속도를 낮추는 것만으로 파손이 해결되지 않는 경우도 많으므로, 이송과 절삭 깊이, 공구 돌출을 함께 점검합니다.</p>
+
+  <h2>공구 비용과 생산성</h2>
+  <p>공구 선택에서는 공구 가격만이 아니라 공구당 가공 개수와 가공 시간까지 함께 계산해야 합니다. 값이 비싼 공구라도 수명이 길고 절삭속도가 높으면 전체 가공 비용이 오히려 낮아지는 경우가 많습니다. 예를 들어 초경 인서트 하나가 고속도강 바이트보다 열 배 비싸더라도, 절삭속도가 세 배 빠르고 수명이 다섯 배 길면 시간당 비용은 낮아집니다. 공구 비용을 계산할 때는 인서트 가격을 가공 개수로 나누고, 가공 시간 단축으로 절감되는 인건비와 장비 사용료를 함께 고려합니다.</p>
+  <p>생산량이 많은 작업에서는 공구 교환 시간을 줄이는 것도 중요합니다. 퀵 체인지 홀더를 쓰면 공구 교환 시간을 크게 줄일 수 있고, 공구를 미리 세팅해 두면 장비 정지 시간을 최소화할 수 있습니다. 공구 수명 관리 시스템을 도입하면 인서트 교환 시기를 자동으로 알려주어 갑작스러운 파손을 막을 수 있습니다. 소량 작업에서는 범용성이 높은 공구를 골고루 갖추는 것이 유리하고, 대량 생산에서는 전용 공구에 투자하는 것이 유리합니다. 현장의 생산량과 공차 요구 수준에 맞는 공구 전략을 세우는 것이 장기적으로 비용을 줄이는 방법입니다.</p>
+
+  <p>인서트 등급을 고를 때는 공구 제조사의 등급표를 읽는 것이 중요합니다. 초경 등급은 P와 M, K, N, S, H로 구분되며, 각각 강과 스테인리스강, 주철, 비철금속, 내열합금, 경화강에 대응합니다. 같은 P 등급 안에서도 숫자가 작을수록 내마모성이 높고 숫자가 클수록 인성이 높습니다. 연속 절삭과 고속 가공에는 숫자가 작은 등급이 적합하고, 단속 절삭과 충격이 큰 가공에는 숫자가 큰 등급이 적합합니다. 등급을 잘못 선택하면 공구가 빨리 마모되거나 깨지므로, 피삭재와 가공 방식을 먼저 정한 뒤 등급표에서 해당 조합을 찾아야 합니다. 공구 제조사의 카탈로그에는 재질별 권장 등급과 절삭 조건이 함께 실려 있어, 처음 공구를 선택할 때 가장 믿을 만한 자료가 됩니다.</p>
+
+  <table>
+    <tr><th>공구 재질</th><th>경도</th><th>적합한 절삭속도</th><th>장점</th><th>단점</th></tr>
+    <tr><td>고속도강</td><td>중간</td><td>20–40 m/min</td><td>값이 싸고 충격에 강함</td><td>고온에 약함</td></tr>
+    <tr><td>초경</td><td>높음</td><td>80–300 m/min</td><td>범용적이고 수명이 김</td><td>충격에 약해 깨짐</td></tr>
+    <tr><td>세라믹</td><td>매우 높음</td><td>200–600 m/min</td><td>고온에 강함</td><td>충격에 매우 약함</td></tr>
+    <tr><td>다이아몬드</td><td>가장 높음</td><td>300–1000 m/min</td><td>알루미늄 정밀 가공에 최적</td><td>철강에 사용 불가</td></tr>
+    <tr><td>입방정 질화붕소</td><td>매우 높음</td><td>150–400 m/min</td><td>경화강 가공에 적합</td><td>값이 비쌈</td></tr>
+  </table>
+
+  <h2>단계별 공구 선택 절차</h2>
+  <ol>
+    <li><strong>피삭재 확인.</strong> 재질과 경도, 가공 상태를 확인합니다.</li>
+    <li><strong>가공 종류 결정.</strong> 황삭인지 정삭인지, 선반인지 밀링인지 정합니다.</li>
+    <li><strong>공구 재질 선택.</strong> 피삭재에 맞는 공구 재질을 고릅니다.</li>
+    <li><strong>인서트 형상 선택.</strong> 가공 형상과 절삭 깊이에 맞는 형상을 고릅니다.</li>
+    <li><strong>코팅 선택.</strong> 가공 방식과 절삭유 사용 여부에 맞는 코팅을 고릅니다.</li>
+    <li><strong>노즈 반경 결정.</strong> 표면조도 요구 수준에 맞는 노즈 반경을 고릅니다.</li>
+    <li><strong>절삭 조건 설정.</strong> 공구 제조사의 권장 절삭속도와 이송을 확인합니다.</li>
+    <li><strong>시험 가공.</strong> 조건을 확인하며 소량으로 시험 가공을 합니다.</li>
+    <li><strong>수명 기록.</strong> 가공 개수와 마모 상태를 기록해 다음 선택에 반영합니다.</li>
+  </ol>
+
+  <h2>흔한 문제와 원인</h2>
+  <ul>
+    <li><strong>공구가 자주 깨짐:</strong> 충격이 큰 단속 절삭이나 진동이 원인. 인성이 좋은 등급으로 바꾸고 돌출을 줄입니다.</li>
+    <li><strong>날에 칩이 달라붙음:</strong> 알루미늄이나 스테인리스강에서 흔한 현상. 코팅과 절삭유를 바꾸고 이송을 높입니다.</li>
+    <li><strong>수명이 너무 짧음:</strong> 절삭속도가 높은 경우. 속도를 낮추거나 코팅 등급을 올립니다.</li>
+    <li><strong>표면이 거칠어짐:</strong> 노즈 반경이 작거나 마모된 경우. 노즈 반경이 큰 인서트로 바꾸고 이송을 낮춥니다.</li>
+  </ul>
+
+  <h2>자주 묻는 질문</h2>
+  <h3>초경 공구가 고속도강보다 항상 좋은가요?</h3>
+  <p>절삭속도와 수명에서는 초경이 우수하지만, 충격에 약하고 값이 비싸다는 단점이 있습니다. 단속 절삭이 많거나 장비 강성이 낮은 경우, 형상이 복잡한 소형 공구에서는 고속도강이 더 나은 선택일 수 있습니다. 가공 조건과 생산량에 따라 두 재질을 구분해 사용하는 것이 실무에서는 중요합니다.</p>
+  <h3>코팅된 공구는 다시 연마해 쓸 수 있나요?</h3>
+  <p>코팅된 인서트는 다시 연마하면 코팅이 벗겨져 효과가 사라지므로 교환하는 것이 원칙입니다. 고속도강 공구는 다시 연마해 쓸 수 있지만, 코팅된 고속도강 공구는 연마 뒤 코팅이 없어져 수명이 짧아집니다. 인서트형 공구는 마모되면 인서트만 교환하는 것이 경제적입니다.</p>
+  <h3>공구 수명을 가장 크게 늘리는 방법은 무엇인가요?</h3>
+  <p>절삭속도를 적정 범위로 낮추는 것이 가장 효과적입니다. 테일러 식에 따르면 절삭속도를 20퍼센트 낮추면 공구 수명이 두 배 가까이 늘어나는 경우가 많습니다. 절삭유를 충분히 공급하고 공구 돌출을 줄여 진동을 막는 것도 수명을 늘리는 데 도움이 됩니다.</p>
+
+  <div class="safety"><strong>안전 주의:</strong> 공구를 교환할 때는 반드시 장비 전원을 끄고 스핀들이 완전히 멈춘 뒤에 작업합니다. 깨진 초경 조각은 매우 날카로우므로 맨손으로 만지지 말고, 공구 파편은 전용 용기에 버립니다.</div>
+
+  <div class="related">
+    <h3>관련 계산기</h3>
+    <ul>
+      <li><a href="../index.html#calc-toollife">공구 수명 계산기</a> — 테일러 식으로 공구 수명 예측하기</li>
+      <li><a href="../index.html#calc-speed">절삭속도·회전수 계산기</a> — 공구에 맞는 회전수 구하기</li>
+      <li><a href="../index.html#calc-power">절삭동력 계산기</a> — 절삭력과 동력 확인하기</li>
+    </ul>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <h4>기계가공 허브</h4>
+        <p>선반과 밀링, 드릴 가공 현장에서 바로 쓰는 무료 절삭가공 계산기와 실무 가이드. KS B · KEC 기준 · 380V 3상 / 220V 단상 · 60Hz.</p>
+        <p style="margin-top:8px">motorwindinghub.github.io/machining-hub/</p>
+      </div>
+      <div>
+        <h4>계산기</h4>
+        <ul>
+          <li><a href="../index.html#calc-speed">절삭속도·회전수 계산기</a></li>
+          <li><a href="../index.html#calc-feed">이송속도 계산기</a></li>
+          <li><a href="../index.html#calc-time">가공 시간 계산기</a></li>
+          <li><a href="../index.html#calc-toollife">공구 수명 계산기</a></li>
+          <li><a href="../index.html#calc-power">절삭동력 계산기</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>가이드</h4>
+        <ul>
+          <li><a href="lathe-basics.html">선반 가공 기초</a></li>
+          <li><a href="milling-basics.html">밀링 가공 기초</a></li>
+          <li><a href="drilling-basics.html">드릴 가공과 구멍 정밀도</a></li>
+          <li><a href="tool-selection.html">절삭공구 선택과 재질</a></li>
+          <li><a href="precision-surface-finish.html">가공 정밀도와 표면조도</a></li>
+          <li><a href="cutting-fluid.html">절삭유 선택과 관리</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="copy">© 2026 기계가공 허브 · 모든 계산은 브라우저 안에서 이루어집니다 · 결과는 추정치이며 공구 제조사 자료와 현장 규정에 따라 확인하십시오.</div>
+  </div>
+</footer>
+
+</body>
+</html>

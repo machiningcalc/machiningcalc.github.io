@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>밀링 가공 기초 — 기계가공 허브</title>
+<meta name="description" content="밀링 머신의 구조와 커터 선택, 평면과 측면, 홈 가공 순서를 설명합니다. 상향 절삭과 하향 절삭의 차이부터 절삭 조건 설정까지 밀링 입문자를 위한 실무 가이드입니다.">
+<meta name="theme-color" content="#0f172a">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<style>
+:root{--navy:#0f172a;--navy2:#1e293b;--amber:#f59e0b;--amber-dark:#d97706;--amber-bg:#fef3c7;--bg:#f1f5f9;--card:#fff;--text:#0f172a;--muted:#64748b;--border:#e2e8f0;--green:#15803d;--green-bg:#dcfce7;--red:#b91c1c;--red-bg:#fee2e2;--radius:14px;--shadow:0 1px 3px rgba(15,23,42,.08),0 4px 14px rgba(15,23,42,.06)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.65}
+.wrap{max-width:860px;margin:0 auto;padding:0 16px}
+a{color:var(--amber-dark)}
+header{background:var(--navy);color:#fff;position:sticky;top:0;z-index:50;box-shadow:0 2px 10px rgba(0,0,0,.25)}
+.header-in{display:flex;align-items:center;gap:14px;padding:13px 16px;max-width:1080px;margin:0 auto;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:#fff;flex:1;min-width:200px}
+.brand .mark{width:38px;height:38px;border-radius:9px;background:var(--amber);color:var(--navy);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:19px;flex:none}
+.brand b{font-size:19px;letter-spacing:.2px}
+.brand b span{color:var(--amber)}
+.brand small{display:block;font-size:11.5px;color:#94a3b8;font-weight:400}
+nav.main-nav{display:flex;gap:4px;flex-wrap:wrap}
+nav.main-nav a{color:#cbd5e1;text-decoration:none;font-size:14px;font-weight:600;padding:8px 11px;border-radius:8px}
+nav.main-nav a:hover{background:var(--navy2);color:#fff}
+.article{padding:26px 0 12px}
+.back{margin-bottom:10px}
+.back a{font-weight:700;text-decoration:none}
+.back a:hover{text-decoration:underline}
+.crumb{font-size:12.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--amber-dark);margin-bottom:6px}
+.article h1{font-size:clamp(26px,4.5vw,34px);line-height:1.25;margin-bottom:10px}
+.lede{font-size:17px;color:#334155;margin-bottom:22px}
+.article h2{font-size:21px;margin:28px 0 8px;padding-top:6px;border-top:2px solid var(--amber);display:inline-block}
+.article h3{font-size:17px;margin:18px 0 6px}
+.article p{font-size:15.5px;color:#1e293b;margin-bottom:12px}
+.article ul,.article ol{margin:0 0 14px 22px;font-size:15.5px;color:#1e293b}
+.article li{margin-bottom:6px}
+.article table{border-collapse:collapse;width:100%;font-size:14px;margin:12px 0 16px;background:#fff;border-radius:10px;overflow:hidden;box-shadow:var(--shadow)}
+.article th{background:var(--navy);color:#fff;text-align:left;padding:10px 12px}
+.article td{padding:9px 12px;border-bottom:1px solid var(--border)}
+.article tr:nth-child(even) td{background:#f8fafc}
+.formula{font-size:13.5px;color:var(--muted);background:#fff;border:1px dashed var(--border);border-radius:8px;padding:10px 12px;margin:12px 0}
+.formula code{color:var(--navy);font-weight:600}
+.safety{background:var(--red-bg);border-left:4px solid var(--red);border-radius:10px;padding:14px 16px;margin:22px 0;font-size:14.5px;color:#7f1d1d}
+.related{background:var(--amber-bg);border:1px solid #fde68a;border-radius:12px;padding:16px 18px;margin:22px 0}
+.related h3{font-size:15px;margin:0 0 8px}
+.related ul{margin:0 0 0 20px}
+.related li{margin-bottom:4px}
+footer{background:var(--navy);color:#94a3b8;margin-top:44px;padding:30px 0 26px}
+footer .cols{display:grid;grid-template-columns:1fr;gap:20px}
+@media(min-width:640px){footer .cols{grid-template-columns:2fr 1fr 1fr}}
+footer h4{color:#fff;font-size:15px;margin-bottom:10px}
+footer p,footer a{font-size:13.5px;color:#94a3b8;text-decoration:none}
+footer a:hover{color:#fff}
+footer ul{list-style:none}
+footer li{margin-bottom:6px}
+.copy{border-top:1px solid #1e293b;margin-top:22px;padding-top:16px;font-size:12.5px;text-align:center}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-in">
+    <a class="brand" href="../index.html"><span class="mark">기</span><span><b>기계가공 <span>허브</span></b><small>motorwindinghub.github.io/machining-hub/</small></span></a>
+    <nav class="main-nav">
+      <a href="../index.html#calculators">계산기</a>
+      <a href="../index.html#reference">참고 표</a>
+      <a href="../index.html#guides">가이드</a>
+      <a href="../index.html#faq">자주 묻는 질문</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap article">
+  <p class="back"><a href="../index.html">&larr; 기계가공 허브로 돌아가기</a></p>
+  <p class="crumb">가이드 / 밀링 가공</p>
+  <h1>밀링 가공 기초</h1>
+  <p class="lede">밀링은 회전하는 커터로 고정된 공작물을 깎아 평면과 홈, 단차, 윤곽 형상을 만드는 가공 방법입니다. 선반이 회전 대칭 형상을 만든다면, 밀링은 평평한 면과 각진 형상을 만드는 데 강합니다. 금형 베이스와 브라켓, 하우징처럼 평면이 많은 부품은 대부분 밀링에서 가공됩니다. 이 가이드는 밀링 머신의 구조와 커터 선택, 상향 절삭과 하향 절삭의 차이, 기본 가공 순서를 정리해 밀링을 처음 배우는 사람이 현장에서 바로 활용할 수 있도록 돕습니다.</p>
+
+  <h2>밀링 머신의 구조와 종류</h2>
+  <p>밀링 머신은 스핀들이 수직인 수직형과 수평인 수평형으로 나뉩니다. 수직형은 평면 가공과 홈 가공, 드릴 가공을 한 장비에서 할 수 있어 일반적인 작업장에서 가장 흔합니다. 수평형은 측면 가공과 깊은 홈 가공에 유리하며, 대형 공작물이나 생산량이 많은 작업에 쓰입니다. 머시닝센터는 공구 교환 장치를 갖춘 수치제어 밀링 머신으로, 프로그램에 따라 공구를 자동으로 바꾸며 복잡한 형상을 가공합니다. 수동 밀링 머신은 작업자가 핸들로 테이블을 움직이며 가공하므로, 소량 작업과 수리 작업에 적합합니다.</p>
+  <p>밀링 머신의 주요 부위는 스핀들과 테이블, 새들, 니, 컬럼입니다. 스핀들은 커터를 고정하고 회전시키는 부분이며, 회전수와 이송속도를 조절합니다. 테이블은 공작물을 고정하는 바이스나 지그가 올려지는 자리로, 좌우와 앞뒤로 이동합니다. 니는 테이블을 상하로 움직여 절삭 깊이를 조절합니다. 컬럼은 장비의 기둥으로 스핀들과 테이블을 지탱합니다. 테이블의 이송 나사에 백래시가 있으면 가공 중 위치가 흔들리므로, 정기적으로 점검하고 필요하면 조정해야 합니다. 디지털 표시 장치가 있는 장비는 위치를 숫자로 확인할 수 있어 정밀 가공에 큰 도움이 됩니다.</p>
+
+  <h2>커터의 종류와 선택 기준</h2>
+  <p>밀링 커터는 가공 목적에 따라 종류가 다양합니다. 평면 가공에는 페이스 밀이 쓰이며, 직경이 커서 넓은 면을 한 번에 깎을 수 있습니다. 엔드 밀은 측면과 홈, 윤곽 가공에 가장 많이 쓰이는 커터로, 직경과 날 수, 재질을 다양하게 선택할 수 있습니다. 볼 엔드 밀은 곡면 가공에 쓰이며, 금형의 곡면을 다듬을 때 필수적입니다. 슬롯 드릴은 홈 가공 전용 커터로, 아래 방향으로 절삭할 수 있어 홈을 파는 데 적합합니다. 드릴과 리머를 밀링 머신에 장착해 구멍 가공을 할 수도 있습니다.</p>
+  <p>커터를 선택할 때는 먼저 가공할 형상과 재질, 장비의 강성을 고려합니다. 날 수가 많은 커터는 이송속도를 높일 수 있지만 칩 배출 공간이 좁아져 깊은 가공에는 불리합니다. 날 수가 적은 커터는 칩 배출이 잘되고 절삭력이 작아 장비 강성이 낮을 때 유리합니다. 알루미늄처럼 부드러운 재질은 날 수가 적고 날 간격이 넓은 커터가 좋고, 강처럼 단단한 재질은 날 수가 많은 커터가 표면을 깨끗하게 만듭니다. 커터 직경은 가공 면보다 약간 작게 선택하는 것이 일반적이며, 너무 큰 커터는 절삭력이 커져 진동이 생길 수 있습니다. 커터는 홀더에 단단히 고정하고, 흔들림이 없는지 확인한 뒤에 사용합니다.</p>
+
+  <h2>상향 절삭과 하향 절삭</h2>
+  <p>상향 절삭은 커터의 회전 방향과 테이블의 이송 방향이 반대가 되는 방식으로, 칩 두께가 0에서 시작해 점점 두꺼워집니다. 절삭 시작 시 공구가 재료를 문지르며 진입하므로 표면이 거칠어질 수 있지만, 백래시가 있는 구형 장비에서도 공작물이 끌려가는 현상이 없어 안전합니다. 상향 절삭은 주철처럼 단단하고 표면이 거친 재질의 황삭에 적합하며, 스케일이 있는 주물 표면을 가공할 때 공구 수명이 길다는 장점이 있습니다.</p>
+  <p>하향 절삭은 커터의 회전 방향과 이송 방향이 같은 방식으로, 칩 두께가 최대에서 시작해 0으로 줄어듭니다. 절삭력이 아래 방향으로 작용해 공작물을 테이블에 눌러 고정하므로 진동이 적고 표면이 깨끗하게 나옵니다. 칩이 공구 뒤로 배출되어 절삭면을 다시 긁지 않는 것도 장점입니다. 다만 백래시가 큰 장비에서는 커터가 공작물을 끌어당겨 이송이 갑자기 빨라지는 현상이 생길 수 있어, 하향 절삭을 쓰려면 이송 나사의 백래시를 먼저 제거해야 합니다. 현대의 수치제어 장비는 백래시 보정 기능이 있어 하향 절삭을 기본으로 사용합니다.</p>
+
+  <h2>공작물 고정과 기준면 설정</h2>
+  <p>밀링에서 공작물을 고정할 때는 바이스가 가장 많이 쓰입니다. 바이스는 공작물을 강하게 조여 절삭력에 견디게 하며, 고정된 면이 기준면이 됩니다. 바이스에 공작물을 물릴 때는 접촉면이 깨끗한지 확인하고, 공작물이 바이스 바닥에 완전히 닿았는지 확인합니다. 공작물이 기울어져 물리면 가공면도 기울어집니다. 얇은 판재는 바이스로 조이면 휘어질 수 있으므로, 클램프로 테이블에 직접 고정하거나 진공 척을 사용하는 것이 좋습니다. 대형 공작물은 T슬롯에 클램프와 스텝 블록을 이용해 여러 곳에서 고정합니다.</p>
+  <p>가공을 시작하기 전에 기준면을 설정해야 합니다. 기준면은 도면에서 치수의 출발점이 되는 면으로, 보통 평면 가공으로 먼저 만듭니다. 첫 번째 면을 가공한 뒤 그 면을 기준으로 나머지 면을 가공하면 치수가 안정됩니다. 기준점을 잡을 때는 엣지 파인더나 터치 프로브를 사용해 공작물 끝면의 위치를 정확히 찾습니다. 수치제어 장비에서는 공작물 좌표계를 설정해 기준점을 저장하고, 같은 부품을 반복 가공할 때 그대로 사용합니다. 기준면을 바꾸면 모든 치수가 어긋나므로, 작업 중간에 기준을 바꾸지 않는 것이 중요합니다.</p>
+
+  <h2>절삭 조건의 설정</h2>
+  <p>밀링의 절삭 조건은 절삭속도와 이송속도, 절삭 깊이와 절삭 폭으로 정합니다. 절삭속도는 커터 직경과 재질에 따라 정해지며, 초경 엔드 밀로 탄소강을 가공할 때는 분당 120에서 180미터 수준이 일반적인 시작점입니다. 회전수는 절삭속도 계산기로 구할 수 있습니다. 이송속도는 날당 이송과 날 수, 회전수를 곱해 구합니다. 날당 이송은 재질과 커터 직경에 따라 달라지며, 탄소강에서는 한 날당 0.08에서 0.15밀리미터가 보통입니다. 이송이 너무 작으면 공구가 재료를 문질러 표면이 나빠지고, 너무 크면 절삭력이 커져 공구가 파손될 수 있습니다.</p>
+  <p>절삭 깊이는 축 방향으로 깎는 깊이이고, 절삭 폭은 반경 방향으로 깎는 폭입니다. 황삭에서는 깊이와 폭을 크게 잡아 재료를 빠르게 제거하고, 정삭에서는 얇게 잡아 표면을 다듬습니다. 절삭 폭이 커터 직경의 절반을 넘으면 절삭력이 급격히 커지므로, 황삭에서도 폭은 직경의 50퍼센트 이하로 잡는 것이 안전합니다. 깊은 홈을 가공할 때는 깊이를 여러 번에 나누어 조금씩 파는 것이 좋습니다. 절삭 조건을 처음 정할 때는 권장 범위의 하한에서 시작해 소리와 칩 상태를 보면서 점차 올립니다. 절삭음이 날카롭게 변하거나 진동이 생기면 조건을 낮추어야 합니다.</p>
+
+  <h2>평면과 홈, 측면 가공</h2>
+  <p>평면 가공은 페이스 밀로 넓은 면을 깎는 작업입니다. 페이스 밀의 직경은 가공 면보다 크게 선택하는 것이 일반적이며, 커터가 가공 면을 완전히 덮으면 한 번의 패스로 면을 만들 수 있습니다. 평면을 가공할 때는 커터 중심이 가공 면의 중심을 지나도록 위치를 잡고, 절삭 깊이를 일정하게 유지합니다. 평면의 평탄도는 테이블의 상태와 커터의 흔들림에 영향을 받으므로, 가공 전에 테이블을 청소하고 커터를 점검합니다. 평면을 여러 패스로 나눌 때는 패스 사이의 이음새가 생기지 않도록 절삭 폭을 겹치게 합니다.</p>
+  <p>홈 가공은 엔드 밀이나 슬롯 드릴로 직선 홈을 파는 작업입니다. 홈을 팔 때는 먼저 드릴로 홈 끝에 구멍을 뚫어 칩 배출 공간을 만들거나, 커터를 지그재그로 움직여 점진적으로 깊이를 늘리는 방법을 씁니다. 홈 폭이 커터 직경과 같으면 양쪽 면을 동시에 깎게 되어 절삭력이 크고 칩 배출이 어려우므로, 깊은 홈은 폭을 나누어 가공하는 것이 좋습니다. 측면 가공은 공작물의 옆면을 깎는 작업으로, 엔드 밀의 측면 날을 사용합니다. 측면 가공에서는 절삭 깊이보다 절삭 폭을 작게 잡아 진동을 줄이고, 마무리 패스에서는 얇게 깎아 표면을 다듬습니다. 단차를 가공할 때는 단차 깊이를 정확히 맞추기 위해 니의 위치를 디지털 표시 장치로 확인합니다.</p>
+
+  <p>밀링 작업의 품질을 좌우하는 또 하나의 요소는 테이블과 바이스의 평행도입니다. 바이스가 테이블에 기울어져 고정되면 가공면도 함께 기울어지므로, 바이스를 설치할 때는 다이얼 게이지로 고정 조의 면이 테이블 이송 방향과 평행한지 반드시 확인해야 합니다. 평행도가 0.02밀리미터를 넘으면 가공면의 직각도가 어긋나 조립에 문제가 생깁니다. 공작물을 바이스에 물릴 때는 패럴렐 블록을 이용해 공작물을 수평으로 받치고, 조임 뒤에 다이얼 게이지로 흔들림이 없는지 다시 확인합니다. 얇은 판재는 조임력에 의해 휘어지기 쉬우므로, 클램프 위치를 여러 곳에 나누고 조임력을 고르게 분산시키는 것이 좋습니다. 테이블의 T슬롯에 낀 칩을 방치하면 지그가 기울어져 고정되므로, 고정 전에 슬롯을 깨끗이 청소하는 습관을 들이십시오.</p>
+
+  <table>
+    <tr><th>커터 종류</th><th>주요 용도</th><th>특징</th><th>적합한 재질</th></tr>
+    <tr><td>페이스 밀</td><td>평면 가공</td><td>직경이 크고 면이 넓음</td><td>강, 주철, 알루미늄</td></tr>
+    <tr><td>엔드 밀</td><td>측면, 홈, 윤곽</td><td>가장 범용적</td><td>모든 재질</td></tr>
+    <tr><td>볼 엔드 밀</td><td>곡면 가공</td><td>끝이 둥근 형상</td><td>금형강, 알루미늄</td></tr>
+    <tr><td>슬롯 드릴</td><td>홈 가공</td><td>아래 방향 절삭 가능</td><td>강, 알루미늄</td></tr>
+    <tr><td>황삭용 엔드 밀</td><td>빠른 재료 제거</td><td>칩 브레이커 형상</td><td>강, 스테인리스강</td></tr>
+    <tr><td>면취 커터</td><td>모서리 면취</td><td>45도 각도 날</td><td>모든 재질</td></tr>
+  </table>
+
+  <h2>단계별 가공 절차</h2>
+  <ol>
+    <li><strong>도면 확인.</strong> 치수와 공차, 표면조도, 재질을 확인하고 가공 순서를 정합니다.</li>
+    <li><strong>공작물 고정.</strong> 바이스나 클램프로 공작물을 고정하고 기준면을 설정합니다.</li>
+    <li><strong>커터 장착.</strong> 가공 목적에 맞는 커터를 홀더에 고정하고 흔들림을 확인합니다.</li>
+    <li><strong>기준점 설정.</strong> 엣지 파인더로 공작물 끝면 위치를 찾아 기준점을 잡습니다.</li>
+    <li><strong>절삭 조건 설정.</strong> 절삭속도와 이송속도, 절삭 깊이와 폭을 정합니다.</li>
+    <li><strong>평면 황삭.</strong> 기준면을 먼저 가공하고 여유를 남겨 둡니다.</li>
+    <li><strong>형상 가공.</strong> 홈과 측면, 단차를 순서대로 가공합니다.</li>
+    <li><strong>치수 측정.</strong> 버니어 캘리퍼스와 마이크로미터로 치수를 확인합니다.</li>
+    <li><strong>정삭 가공.</strong> 마무리 패스로 최종 치수와 표면을 맞춥니다.</li>
+    <li><strong>최종 검사.</strong> 모든 치수와 표면을 검사하고 기록한 뒤 공작물을 분리합니다.</li>
+  </ol>
+
+  <h2>흔한 문제와 원인</h2>
+  <ul>
+    <li><strong>표면에 진동 자국:</strong> 커터 돌출이 길거나 절삭 폭이 큰 경우. 돌출을 줄이고 폭을 나눕니다.</li>
+    <li><strong>모서리가 깨짐:</strong> 공구가 마모되었거나 이송이 큰 경우. 공구를 교환하고 이송을 낮춥니다.</li>
+    <li><strong>칩이 커터에 달라붙음:</strong> 알루미늄 가공 시 흔한 현상. 절삭유를 공급하고 날 수가 적은 커터를 씁니다.</li>
+    <li><strong>치수가 어긋남:</strong> 백래시나 기준점 설정 오류가 원인입니다. 백래시를 제거하고 기준점을 다시 잡습니다.</li>
+  </ul>
+
+  <h2>자주 묻는 질문</h2>
+  <h3>하향 절삭이 좋은데 왜 상향 절삭을 쓰나요?</h3>
+  <p>하향 절삭은 표면이 깨끗하고 진동이 적지만, 백래시가 큰 구형 장비에서는 커터가 공작물을 끌어당기는 현상이 생겨 위험합니다. 또한 주물 표면처럼 단단한 스케일이 있는 면은 상향 절삭으로 가공해야 공구 수명이 깁니다. 장비 상태와 재질에 따라 두 방식을 구분해 사용하는 것이 실무에서는 중요합니다.</p>
+  <h3>홈 가공에서 칩이 잘 빠지지 않으면 어떻게 하나요?</h3>
+  <p>칩이 홈 안에 쌓이면 공구가 칩을 다시 깎아 표면이 나빠지고 공구가 파손될 수 있습니다. 절삭유를 강하게 분사해 칩을 씻어내고, 홈을 여러 번에 나누어 조금씩 파며, 날 수가 적은 커터를 사용하면 칩 배출이 좋아집니다. 에어 블로어로 칩을 수시로 불어내는 것도 도움이 됩니다.</p>
+  <h3>페이스 밀과 엔드 밀 중 평면 가공에는 어느 쪽이 좋은가요?</h3>
+  <p>넓은 평면은 페이스 밀이 빠르고 표면이 안정적입니다. 다만 가공 면이 좁거나 단차가 많으면 엔드 밀이 유연합니다. 면적이 넓고 평탄도가 중요한 부품은 페이스 밀을, 형상이 복잡하거나 면이 작은 부품은 엔드 밀을 선택하는 것이 일반적입니다.</p>
+
+  <div class="safety"><strong>안전 주의:</strong> 밀링 머신은 고속으로 회전하는 커터가 노출되어 있어 매우 위험합니다. 가공 중에는 커터 근처에 손을 대지 말고, 칩을 제거할 때는 반드시 스핀들을 멈춘 뒤 브러시를 사용합니다. 장갑은 회전부에 말려 들어갈 수 있으므로 끼지 않습니다.</div>
+
+  <div class="related">
+    <h3>관련 계산기</h3>
+    <ul>
+      <li><a href="../index.html#calc-speed">절삭속도·회전수 계산기</a> — 커터 직경에 맞는 회전수 구하기</li>
+      <li><a href="../index.html#calc-feed">이송속도 계산기</a> — 날당 이송에서 이송속도 구하기</li>
+      <li><a href="../index.html#calc-power">절삭동력 계산기</a> — 절삭력과 동력 확인하기</li>
+    </ul>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <h4>기계가공 허브</h4>
+        <p>선반과 밀링, 드릴 가공 현장에서 바로 쓰는 무료 절삭가공 계산기와 실무 가이드. KS B · KEC 기준 · 380V 3상 / 220V 단상 · 60Hz.</p>
+        <p style="margin-top:8px">motorwindinghub.github.io/machining-hub/</p>
+      </div>
+      <div>
+        <h4>계산기</h4>
+        <ul>
+          <li><a href="../index.html#calc-speed">절삭속도·회전수 계산기</a></li>
+          <li><a href="../index.html#calc-feed">이송속도 계산기</a></li>
+          <li><a href="../index.html#calc-time">가공 시간 계산기</a></li>
+          <li><a href="../index.html#calc-toollife">공구 수명 계산기</a></li>
+          <li><a href="../index.html#calc-power">절삭동력 계산기</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>가이드</h4>
+        <ul>
+          <li><a href="lathe-basics.html">선반 가공 기초</a></li>
+          <li><a href="milling-basics.html">밀링 가공 기초</a></li>
+          <li><a href="drilling-basics.html">드릴 가공과 구멍 정밀도</a></li>
+          <li><a href="tool-selection.html">절삭공구 선택과 재질</a></li>
+          <li><a href="precision-surface-finish.html">가공 정밀도와 표면조도</a></li>
+          <li><a href="cutting-fluid.html">절삭유 선택과 관리</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="copy">© 2026 기계가공 허브 · 모든 계산은 브라우저 안에서 이루어집니다 · 결과는 추정치이며 공구 제조사 자료와 현장 규정에 따라 확인하십시오.</div>
+  </div>
+</footer>
+
+</body>
+</html>
